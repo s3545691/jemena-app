@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Maintenance</string>
+    <string name="new_form_button">New Form </string>
 </resources>
