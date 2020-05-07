@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,12 +62,13 @@ public class FormActivity extends AppCompatActivity {
             inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
+        // TODO: rework this once more prompt types have been added
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             RadioPrompt radioPrompt = (RadioPrompt)getItem(position);
             Boolean isRecyclingView = convertView != null;
             RadioGroup radioGroup;
-            EditText prompt;
+            TextView prompt;
 
             if (isRecyclingView) {
 
