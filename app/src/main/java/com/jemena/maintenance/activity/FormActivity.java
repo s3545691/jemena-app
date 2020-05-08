@@ -19,6 +19,7 @@ import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
@@ -29,26 +30,37 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form);
 
-        // TODO: Initialise test form more cleanly
-        ArrayList<FormComponent> formComponents = new ArrayList<>();
+        // Initialise the data
+        initTestData();
+
+        // Initialise the list
+        configInterface();
+    }
+
+    private void initTestData() {
+        components = new ArrayList<>();
+
+        List<String> options = Arrays.asList(
+                "Yes",
+                "No",
+                "Maybe"
+        );
 
         ArrayList<String> radioOptions = new ArrayList();
-        radioOptions.add("Yes");
-        radioOptions.add("No");
-        radioOptions.add("Maybe");
+        radioOptions.addAll(options);
         RadioPrompt testRadioPrompt = new RadioPrompt(
-                this,
                 "Is this a yes or no question",
                 radioOptions
         );
-        formComponents.add(testRadioPrompt);
-
-        // TODO: Initialise the list more cleanly
-        ListView componentList = this.findViewById(R.id.component_list);
-        FormArrayAdapter adapter = new FormArrayAdapter(this, R.id.component_list, formComponents);
-        componentList.setAdapter(adapter);
+        components.add(testRadioPrompt);
     }
 
+    private void configInterface() {
+        ListView componentList = this.findViewById(R.id.component_list);
+        FormArrayAdapter adapter = new FormArrayAdapter(this, R.id.component_list,
+                components);
+        componentList.setAdapter(adapter);
+    }
 
     // The class responsible for taking the data for each component and putting it into a view
     private class FormArrayAdapter extends ArrayAdapter<FormComponent> {

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.activity.RadioPromptActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,10 @@ public class RadioPromptCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.radio_prompt_create);
 
+        configInterface();
+    }
+
+    private void configInterface() {
         list = this.findViewById(R.id.option_list);
         prompt = this.findViewById(R.id.prompt);
         prompt.setText("Prompt");
@@ -42,11 +45,9 @@ public class RadioPromptCreateActivity extends AppCompatActivity {
         adapter = new OptionArrayAdapter(this, R.id.option_list, options);
         list.setAdapter(adapter);
 
-        // Todo: create a function that calls all configs in the right order
         configureAddOptionButton();
         configurePreviewButton();
     }
-
 
     private void configureAddOptionButton() {
         addOptionButton = this.findViewById(R.id.add_option_button);
@@ -82,15 +83,12 @@ public class RadioPromptCreateActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-
-
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.removable_item, null);
             }
 
             configureTextView(convertView, position);
             configureCloseButton(convertView, position);
-
 
             return convertView;
         }
