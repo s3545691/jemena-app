@@ -1,12 +1,8 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.activity;
 
-import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +13,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.util.Function;
 
-import org.w3c.dom.Text;
+import com.jemena.maintenance.R;
+import com.jemena.maintenance.activity.RadioPromptActivity;
 
 import java.util.ArrayList;
 import java.util.List;

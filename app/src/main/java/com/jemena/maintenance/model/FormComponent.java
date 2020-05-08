@@ -1,15 +1,11 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.model;
 
 import android.content.Context;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public abstract class FormComponent extends ConstraintLayout {
+public abstract class FormComponent {
     private String prompt;
-
-    public FormComponent(Context context) {
-        super(context);
-    }
 
     public String getPrompt() {
         return prompt;

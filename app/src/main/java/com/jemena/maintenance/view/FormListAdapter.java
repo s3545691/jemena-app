@@ -1,4 +1,4 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.jemena.maintenance.R;
 
 import java.util.ArrayList;
 

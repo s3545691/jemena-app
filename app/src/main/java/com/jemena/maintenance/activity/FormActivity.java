@@ -1,26 +1,24 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.jemena.maintenance.model.FormComponent;
+import com.jemena.maintenance.R;
+import com.jemena.maintenance.model.RadioPrompt;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {

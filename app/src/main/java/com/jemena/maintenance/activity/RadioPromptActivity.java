@@ -1,4 +1,4 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
+
+import com.jemena.maintenance.R;
 
 import java.util.ArrayList;
 

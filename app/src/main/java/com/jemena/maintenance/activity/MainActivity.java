@@ -1,10 +1,13 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import com.jemena.maintenance.view.FormListAdapter;
+import com.jemena.maintenance.R;
 
 import java.util.ArrayList;
 

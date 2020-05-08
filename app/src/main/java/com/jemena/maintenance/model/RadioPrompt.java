@@ -1,16 +1,16 @@
-package com.jemena.maintenance;
+package com.jemena.maintenance.model;
 
 import android.content.Context;
 
+import com.jemena.maintenance.model.FormComponent;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class RadioPrompt extends FormComponent {
     private ArrayList<String> options;
     private int selectedIndex;
 
-    public RadioPrompt(Context context, String prompt, ArrayList<String> options) {
-        super(context);
+    public RadioPrompt(String prompt, ArrayList<String> options) {
         this.setPrompt(prompt);
         this.options = options;
         selectedIndex = -1;
