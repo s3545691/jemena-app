@@ -49,8 +49,10 @@ public class FormActivity extends AppCompatActivity {
         ArrayList<String> radioOptions = new ArrayList();
         radioOptions.addAll(options);
         RadioPrompt testRadioPrompt = new RadioPrompt(
+                this,
                 "Is this a yes or no question",
-                radioOptions
+                radioOptions,
+                false
         );
         components.add(testRadioPrompt);
     }
@@ -80,34 +82,7 @@ public class FormActivity extends AppCompatActivity {
             RadioGroup radioGroup;
             TextView prompt;
 
-            if (isRecyclingView) {
-
-                radioGroup = (RadioGroup)convertView.findViewById(R.id.radio_group);
-                // Remove any prompts that may be in the recycled view
-                radioGroup.removeAllViews();
-            }
-            else {
-                convertView = inflater.inflate(R.layout.radio_prompt, null);
-                radioGroup = (RadioGroup)convertView.findViewById(R.id.radio_group);
-            }
-
-            prompt = convertView.findViewById(R.id.prompt);
-            prompt.setText(radioPrompt.getPrompt());
-
-            // Create and add the radio buttons
-            radioGroup = (RadioGroup)convertView.findViewById(R.id.radio_group);
-            for (int i=0; i < radioPrompt.getOptions().size(); i++) {
-
-                RadioButton radioButton = new RadioButton(getContext());
-                radioButton.setText(radioPrompt.getOptions().get(i));
-                radioButton.setId(ViewCompat.generateViewId());
-
-                RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-                        RadioGroup.LayoutParams.MATCH_PARENT,
-                        RadioGroup.LayoutParams.MATCH_PARENT
-                );
-                radioGroup.addView(radioButton, params);
-            }
+            convertView = radioPrompt.getView();
             return convertView;
         }
     }

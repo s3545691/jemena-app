@@ -1,35 +1,37 @@
 package com.jemena.maintenance.model;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
-import com.jemena.maintenance.model.FormComponent;
+import androidx.core.view.ViewCompat;
+
+import com.jemena.maintenance.R;
+import com.jemena.maintenance.view.form_component_factory.RadioPromptViewFactory;
+
 
 import java.util.ArrayList;
 
-public class RadioPrompt extends FormComponent {
-    private ArrayList<String> options;
+public class RadioPrompt extends FormComponent<ArrayList<String>> {
     private int selectedIndex;
 
-    public RadioPrompt(String prompt, ArrayList<String> options) {
-        this.setPrompt(prompt);
-        this.options = options;
+    public RadioPrompt(Context context, String prompt, ArrayList<String> options,
+                       Boolean isEditing) {
+        super(context, prompt, isEditing, new RadioPromptViewFactory(context), options);
         selectedIndex = -1;
+
+        // Create the view for the component
     }
 
     public void select(int index) {
-        // Do nothing if an incorrect index is given
-        if (index < -1 || index >= options.size()) {
+        // Do nothing if an invalid index is given
+        if (index < -1 || index >= getOptions().size()) {
             return;
         }
         this.selectedIndex = index;
-    }
-
-    public ArrayList<String> getOptions() {
-        return options;
-    }
-
-    public void setOptions(ArrayList<String> options) {
-        this.options = options;
     }
 
     @Override
@@ -37,6 +39,7 @@ public class RadioPrompt extends FormComponent {
         if (selectedIndex == -1) {
             return null;
         }
-        return options.get(selectedIndex);
+        return getOptions().get(selectedIndex);
     }
+
 }
