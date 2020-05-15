@@ -37,31 +37,8 @@ public class FormActivity extends AppCompatActivity {
         addPromptList = findViewById(R.id.add_prompt_list);
         addPromptList.setVisibility(View.GONE);
 
-        // Initialise the data
-        initTestData();
-
         // Initialise the list
         configInterface();
-    }
-
-    private void initTestData() {
-        components = new ArrayList<>();
-
-        List<String> options = Arrays.asList(
-                "Yes",
-                "No",
-                "Maybe"
-        );
-
-        ArrayList<String> radioOptions = new ArrayList();
-        radioOptions.addAll(options);
-        RadioPrompt testRadioPrompt = new RadioPrompt(
-                this,
-                "Is this a yes or no question",
-                radioOptions,
-                false
-        );
-        components.add(testRadioPrompt);
     }
 
     private void configInterface() {
