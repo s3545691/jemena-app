@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.jemena.maintenance.view.form_component_factory.FormViewFactory;
 
-public abstract class FormComponent<T> {
+public abstract class FormComponent<T, S> {
     // Holds the current state of the application
     private Context context;
 
@@ -55,10 +55,16 @@ public abstract class FormComponent<T> {
         this.isEditing = isEditing;
     }
 
+    public void setOptions(T options) {
+        this.options = options;
+    }
+
     public Boolean isEditing() {
         return isEditing;
     }
 
     // The user's response in String form. Should return null if empty
     public abstract String getResponse();
+
+    public abstract void setResponse(S response);
 }

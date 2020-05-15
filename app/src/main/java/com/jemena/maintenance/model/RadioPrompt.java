@@ -15,7 +15,7 @@ import com.jemena.maintenance.view.form_component_factory.RadioPromptViewFactory
 
 import java.util.ArrayList;
 
-public class RadioPrompt extends FormComponent<ArrayList<String>> {
+public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
     private int selectedIndex;
 
     public RadioPrompt(Context context, String prompt, ArrayList<String> options,
@@ -40,6 +40,11 @@ public class RadioPrompt extends FormComponent<ArrayList<String>> {
             return null;
         }
         return getOptions().get(selectedIndex);
+    }
+
+    @Override
+    public void setResponse(Integer response) {
+        select(response);
     }
 
 }

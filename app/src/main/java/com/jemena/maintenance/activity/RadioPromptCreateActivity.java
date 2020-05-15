@@ -50,7 +50,7 @@ public class RadioPromptCreateActivity extends AppCompatActivity {
     }
 
     private void configureAddOptionButton() {
-        addOptionButton = this.findViewById(R.id.add_option_button);
+        addOptionButton = this.findViewById(R.id.add_radio_button);
         addOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
