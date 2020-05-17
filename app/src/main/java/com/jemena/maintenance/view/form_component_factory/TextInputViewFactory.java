@@ -15,7 +15,7 @@ import com.jemena.maintenance.model.TextInput;
 
 import org.w3c.dom.Text;
 
-public class TextInputViewFactory extends FormViewFactory {
+public class TextInputViewFactory extends FormViewFactory<TextInput> {
 
     public TextInputViewFactory(Context context) {
         super(context);

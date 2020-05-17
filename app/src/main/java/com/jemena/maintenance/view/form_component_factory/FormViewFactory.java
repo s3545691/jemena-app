@@ -5,8 +5,9 @@ import android.view.View;
 
 import com.jemena.maintenance.model.FormComponent;
 
-public abstract class FormViewFactory {
+public abstract class FormViewFactory<T extends FormComponent> {
     private Context context;
+    private T component;
 
     public FormViewFactory(Context context) {
         this.context = context;
@@ -31,5 +32,13 @@ public abstract class FormViewFactory {
             view = inflateInputView(component);
         }
         return view;
+    }
+
+    public T getComponent() {
+        return component;
+    }
+
+    public void setComponent(T component) {
+        this.component = component;
     }
 }

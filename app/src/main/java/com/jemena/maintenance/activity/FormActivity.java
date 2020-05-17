@@ -16,82 +16,72 @@ import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
-    private ArrayList<FormComponent> components = new ArrayList<>();
-    private LinearLayout addPromptList;
+    private ArrayList<FormComponent> components;
     private Button addPromptButton;
+
+    // Responsible for displaying each component in the form
+    private FormArrayAdapter adapter;
+
+    // The view that appears when the user wants to add a new component
+    private LinearLayout addPromptList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form);
-        addPromptButton = findViewById(R.id.add_prompt_button);
 
-        // Hide the add prompt list
+        // Set attributes
+        components = new ArrayList<>();
         addPromptList = findViewById(R.id.add_prompt_list);
-        addPromptList.setVisibility(View.GONE);
+        addPromptButton = findViewById(R.id.add_prompt_button);
+        adapter = new FormArrayAdapter(this, R.id.component_list,
+                components);
 
-        // Initialise the list
         configInterface();
     }
 
     private void configInterface() {
+        // Set the adapter for the list view
         ListView componentList = this.findViewById(R.id.component_list);
-        final FormArrayAdapter adapter = new FormArrayAdapter(this, R.id.component_list,
-                components);
         componentList.setAdapter(adapter);
 
+        showAddPromptList(false);
+
         // Config button that adds a new prompt
-        Button addButton = findViewById(R.id.add_prompt_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addPromptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addPromptList.setVisibility(View.VISIBLE);
-                view.setVisibility(View.GONE);
+                showAddPromptList(true);
             }
         });
 
-        // Config the buttons in the add new prompt list
+        configAddPromptList();
+
+    }
+
+    // TODO: Expand as more component types are created
+    private void configAddPromptList() {
         Button addRadioPrompt = findViewById(R.id.add_prompt_radio_button);
         addRadioPrompt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create a new radio prompt
-
-                List<String> options = Arrays.asList(
-                        "Yes",
-                        "No",
-                        "Maybe"
-                );
-
-                ArrayList<String> radioOptions = new ArrayList();
-                radioOptions.addAll(options);
                 RadioPrompt radioPrompt = new RadioPrompt(
                         view.getContext(),
-                        "Is this a yes or no question",
-                        radioOptions,
-                        false
+                        "Edit text",
+                        null,
+                        true
                 );
+                radioPrompt.setArrayAdapter(adapter);
                 components.add(radioPrompt);
                 adapter.notifyDataSetChanged();
 
-                addPromptList.setVisibility(View.GONE);
-                addPromptButton.setVisibility(View.VISIBLE);
-            }
-        });
-
-        Button cancelButton = findViewById(R.id.add_prompt_cancel);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addPromptList.setVisibility(View.GONE);
-                addPromptButton.setVisibility(View.VISIBLE);
+                showAddPromptList(false);
             }
         });
 
@@ -101,17 +91,30 @@ public class FormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new TextInput prompt
                 TextInput textInput = new TextInput(view.getContext(),
-                        "Respond with some text",
-                        false
-                        );
+                        "Enter prompt",
+                        true
+                );
 
                 components.add(textInput);
                 adapter.notifyDataSetChanged();
 
-                addPromptList.setVisibility(View.GONE);
-                addPromptButton.setVisibility(View.VISIBLE);
+                showAddPromptList(false);
             }
         });
+
+        Button cancelButton = findViewById(R.id.add_prompt_cancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddPromptList(false);
+            }
+        });
+    }
+
+    // Toggles between showing the add prompt list and the add prompt button
+    private void showAddPromptList(Boolean showAddPromptList) {
+        addPromptList.setVisibility(showAddPromptList ? View.VISIBLE : View.GONE);
+        addPromptButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
     }
 
     // The class responsible for taking the data for each component and putting it into a view

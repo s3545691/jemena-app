@@ -15,8 +15,13 @@ public class TextInput extends FormComponent<Void, String> {
     }
 
     @Override
-    public String getResponse() {
+    public String getStringResponse() {
         return response;
+    }
+
+    @Override
+    protected Void instantiateEmptyOptions() {
+        return null;
     }
 
     @Override

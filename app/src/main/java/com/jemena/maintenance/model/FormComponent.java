@@ -2,6 +2,7 @@ package com.jemena.maintenance.model;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.jemena.maintenance.view.form_component_factory.FormViewFactory;
 
@@ -9,7 +10,11 @@ public abstract class FormComponent<T, S> {
     // Holds the current state of the application
     private Context context;
 
+    // Must be set in order to change the
+    private ArrayAdapter arrayAdapter;
+
     private String prompt;
+    protected S response;
 
     // Keeps track of whether or not the current component is in edit or input mode
     private Boolean isEditing;
@@ -24,11 +29,15 @@ public abstract class FormComponent<T, S> {
     public FormComponent(Context context, String prompt, Boolean isEditing,
                          FormViewFactory formViewFactory,
                          T options) {
+
         this.context = context;
         this.prompt = prompt;
         this.isEditing = isEditing;
+        arrayAdapter = null;
+        this.options = options == null ? instantiateEmptyOptions() : options;
+
         viewFactory = formViewFactory;
-        this.options = options;
+        formViewFactory.setComponent(this);
     }
 
     public Context getContext() {
@@ -49,22 +58,49 @@ public abstract class FormComponent<T, S> {
 
     public void setPrompt(String prompt) {
         this.prompt = prompt;
+        notifyAdapter();
     }
 
     public void setIsEditing(Boolean isEditing) {
         this.isEditing = isEditing;
+        notifyAdapter();
     }
 
     public void setOptions(T options) {
         this.options = options;
+        notifyAdapter();
     }
 
     public Boolean isEditing() {
         return isEditing;
     }
 
-    // The user's response in String form. Should return null if empty
-    public abstract String getResponse();
+    public   S getResponse() {
+        return response;
+    }
 
-    public abstract void setResponse(S response);
+    // TODO: may have to notifydatasetchanged here
+    public void setResponse(S response) {
+        this.response = response;
+        notifyAdapter();
+    }
+
+    public void setArrayAdapter(ArrayAdapter arrayAdapter) {
+        this.arrayAdapter = arrayAdapter;
+    }
+
+    public ArrayAdapter getArrayAdapter() {
+        return arrayAdapter;
+    }
+
+    private void notifyAdapter() {
+        if (arrayAdapter != null) {
+            arrayAdapter.notifyDataSetChanged();
+        }
+    }
+
+    // The user's response in String form. Should return null if empty
+    public abstract String getStringResponse();
+
+    protected abstract T instantiateEmptyOptions();
 }

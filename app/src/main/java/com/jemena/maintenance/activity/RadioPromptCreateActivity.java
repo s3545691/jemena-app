@@ -61,7 +61,7 @@ public class RadioPromptCreateActivity extends AppCompatActivity {
     }
 
     private void configurePreviewButton() {
-        previewButton = this.findViewById(R.id.preview_button);
+        previewButton = this.findViewById(R.id.save_button);
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
