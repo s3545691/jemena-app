@@ -61,7 +61,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
                 if (options == null) {
                     options = new ArrayList<String>();
                 }
-                options.add("Edit text");
+                options.add("Radio option text");
                 getComponent().setOptions(options);
                 getComponent().getArrayAdapter().notifyDataSetChanged();
             }

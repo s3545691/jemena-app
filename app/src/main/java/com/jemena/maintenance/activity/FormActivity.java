@@ -73,7 +73,7 @@ public class FormActivity extends AppCompatActivity {
                 // Create a new radio prompt
                 RadioPrompt radioPrompt = new RadioPrompt(
                         view.getContext(),
-                        "Edit text",
+                        "Prompt text",
                         null,
                         true
                 );
@@ -91,7 +91,7 @@ public class FormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new TextInput prompt
                 TextInput textInput = new TextInput(view.getContext(),
-                        "Enter prompt",
+                        "Prompt text",
                         true
                 );
 
