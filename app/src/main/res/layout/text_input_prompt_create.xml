@@ -9,8 +9,12 @@
         android:id="@+id/prompt_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prompt"
+        android:layout_marginStart="16dp"
 
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Prompt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,17 +1,12 @@
 package com.jemena.maintenance.view.form_component_factory;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -19,7 +14,6 @@ import android.widget.TextView;
 import androidx.core.view.ViewCompat;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.model.RadioPrompt;
 
 import java.util.ArrayList;
@@ -30,7 +24,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
     }
 
     @Override
-    protected View inflateEditView(final FormComponent radioPrompt) {
+    protected View inflateEditView(final RadioPrompt radioPrompt) {
         // Set reference to model data
         ArrayList<String> options = getComponent().getOptions();
 
@@ -49,7 +43,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         // Add the removable radio options to the LinearLayout
         if (options != null) {
             for (int i=0; i < options.size(); i++) {
-                optionsList.addView(getOptionView(i));
+                optionsList.addView(getOptionView(i, optionsList));
             }
         }
 
@@ -58,11 +52,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
             @Override
             public void onClick(View view) {
                 ArrayList options = getComponent().getOptions();
+
                 if (options == null) {
                     options = new ArrayList<String>();
                 }
+                else {
+                    // Save all input so far
+                    for (int i=0; i < options.size(); i++) {
+                        View radioView = optionsList.getChildAt(i);
+                        EditText radioEditText = radioView.findViewById(R.id.removable_edit_text);
+                        options.set(i, radioEditText.getText().toString());
+                    }
+                }
+
                 options.add("Radio option text");
                 getComponent().setOptions(options);
+                getComponent().setPrompt(prompt.getText().toString());
                 getComponent().getArrayAdapter().notifyDataSetChanged();
             }
         });
@@ -87,12 +92,11 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
                 radioPrompt.setIsEditing(false);
             }
         });
-
         return view;
     }
 
     @Override
-    protected View inflateInputView(FormComponent radioPrompt) {
+    protected View inflateInputView(RadioPrompt radioPrompt) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         ArrayList<String> options = (ArrayList)radioPrompt.getOptions();
         View view = inflater.inflate(R.layout.radio_prompt, null);
@@ -117,29 +121,37 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
                 radioGroup.addView(radioButton, params);
             }
         }
-
         return view;
     }
 
-    private View getOptionView(final int index) {
+    private View getOptionView(final int index, final LinearLayout optionsList) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.removable_item, null);
+        View optionView = inflater.inflate(R.layout.removable_item, null);
 
 
         final ArrayList<String> options = getComponent().getOptions();
-        EditText editText = view.findViewById(R.id.removable_edit_text);
-        ImageButton closeButton = view.findViewById(R.id.removable_imageButton);
+        EditText editText = optionView.findViewById(R.id.removable_edit_text);
+        ImageButton closeButton = optionView.findViewById(R.id.removable_imageButton);
 
         editText.setText(options.get(index));
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Save text of the options
+                for (int i=0; i < optionsList.getChildCount(); i++) {
+                    // No need to set the element that will be removed
+                    if (i == index) {
+                        continue;
+                    }
+                    View currOption = optionsList.getChildAt(i);
+                    EditText editText = currOption.findViewById(R.id.removable_edit_text);
+                    options.set(i, editText.getText().toString());
+                }
                 options.remove(index);
                 getComponent().setOptions(options);
             }
         });
-
-        return view;
+        return optionView;
     }
 }

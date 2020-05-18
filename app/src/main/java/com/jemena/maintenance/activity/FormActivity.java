@@ -94,7 +94,7 @@ public class FormActivity extends AppCompatActivity {
                         "Prompt text",
                         true
                 );
-
+                textInput.setArrayAdapter(adapter);
                 components.add(textInput);
                 adapter.notifyDataSetChanged();
 

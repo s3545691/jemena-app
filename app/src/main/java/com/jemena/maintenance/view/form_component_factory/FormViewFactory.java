@@ -18,12 +18,12 @@ public abstract class FormViewFactory<T extends FormComponent> {
     }
 
     // Inflates and returns the view of the component when the user is filling it out
-    protected abstract View inflateInputView(FormComponent component);
+    protected abstract View inflateInputView(T component);
 
     // Inflates and returns the view of the component when the user is editing it
-    protected abstract View inflateEditView(FormComponent component);
+    protected abstract View inflateEditView(T component);
 
-    public View inflateView(FormComponent component) {
+    public View inflateView(T component) {
         View view;
         if(component.isEditing()) {
             view = inflateEditView(component);

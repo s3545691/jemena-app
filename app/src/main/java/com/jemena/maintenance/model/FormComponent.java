@@ -79,7 +79,6 @@ public abstract class FormComponent<T, S> {
         return response;
     }
 
-    // TODO: may have to notifydatasetchanged here
     public void setResponse(S response) {
         this.response = response;
         notifyAdapter();
