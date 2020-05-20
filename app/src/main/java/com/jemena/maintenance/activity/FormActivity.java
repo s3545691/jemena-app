@@ -23,6 +23,7 @@ import java.util.List;
 public class FormActivity extends AppCompatActivity {
     private ArrayList<FormComponent> components;
     private Button addPromptButton;
+    private Button saveButton;
 
     // Responsible for displaying each component in the form
     private FormArrayAdapter adapter;
@@ -39,6 +40,7 @@ public class FormActivity extends AppCompatActivity {
         components = new ArrayList<>();
         addPromptList = findViewById(R.id.add_prompt_list);
         addPromptButton = findViewById(R.id.add_prompt_button);
+        saveButton = findViewById(R.id.save_button);
         adapter = new FormArrayAdapter(this, R.id.component_list,
                 components);
 
@@ -57,6 +59,14 @@ public class FormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showAddPromptList(true);
+            }
+        });
+
+        // Config button that saves the form
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
             }
         });
 
