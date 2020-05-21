@@ -18,7 +18,6 @@ public class MenuActivity extends AppCompatActivity {
 
     private Button createFormButton;
     private Button viewFormButton;
-    private Button fillFormButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,6 @@ public class MenuActivity extends AppCompatActivity {
         // Set attributes
         createFormButton = (Button) findViewById(R.id.create_form);
         viewFormButton = (Button) findViewById(R.id.view_form);
-        fillFormButton = (Button) findViewById(R.id.fill_form);
         createFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,26 +44,19 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        fillFormButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivityFillForm();
-            }
-        });
            }
 
         public void openActivityCreateForm() {
-            Intent intent = new Intent(this, RadioPromptCreateActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MenuActivity.this, FormActivity.class));
         }
 
         public void openActivityViewForm() {
-            Intent intent = new Intent(this, RadioPromptCreateActivity.class);
+            Intent intent = new Intent(this, FormActivity.class);
             startActivity(intent);
         }
 
         public void openActivityFillForm() {
-            Intent intent = new Intent(this, RadioPromptCreateActivity.class);
+            Intent intent = new Intent(this, FormActivity.class);
             startActivity(intent);
         }
     }

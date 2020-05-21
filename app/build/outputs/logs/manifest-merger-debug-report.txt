@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\0d47a0d6fa5764cd649078b15eaac482\appcompat-1.0.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\380cbbd0623e9b22e21961fc6ec82b14\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\00f76515dcf9be3dc13db152e89539ca\recyclerview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -32,25 +32,25 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\morga\.gradle\ca
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\9c0d2720907bb8bd5d5976efee735314\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\d00c90699ae27cc1e1ce5e4b3e530617\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\13ac386f95e101744ae5f7d486caaa8c\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
-INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
 	package
 		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-22:12
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:1-26:12
 		INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:5:5-20:19
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:5:5-24:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\380cbbd0623e9b22e21961fc6ec82b14\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\380cbbd0623e9b22e21961fc6ec82b14\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.0.1] C:\Users\morga\.gradle\caches\transforms-2\files-2.1\032360533aed7f4773dde0d69318c0bd\core-1.0.1\AndroidManifest.xml:22:5-89
@@ -72,7 +72,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\mo
 	android:theme
 		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:11:9-40
 activity#com.jemena.maintenance.activity.MenuActivity
-ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:9-18:20
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:9-19:20
 	android:name
 		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:19-56
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
@@ -86,9 +86,21 @@ ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManif
 	android:name
 		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:16:27-74
 activity#com.jemena.maintenance.activity.RadioPromptActivity
-ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:19:9-65
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:20:9-65
 	android:name
-		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:19:19-63
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:20:19-63
+activity#com.jemena.maintenance.activity.RadioPromptCreateActivity
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:21:9-71
+	android:name
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:21:19-69
+activity#com.jemena.maintenance.activity.MainActivity
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:22:9-58
+	android:name
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:22:19-56
+activity#com.jemena.maintenance.activity.FormActivity
+ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:23:9-58
+	android:name
+		ADDED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:23:19-56
 uses-sdk
 INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml

@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.jemena.maintenance.activity.RadioPromptActivity" />
+        <activity android:name="com.jemena.maintenance.activity.RadioPromptCreateActivity" />
+        <activity android:name="com.jemena.maintenance.activity.MainActivity" />
+        <activity android:name="com.jemena.maintenance.activity.FormActivity" />
     </application>
 
 </manifest>

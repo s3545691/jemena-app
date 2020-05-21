@@ -11,7 +11,7 @@
 9-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml
 10
 11    <application
-11-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:5:5-20:19
+11-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:5:5-24:19
 12        android:allowBackup="true"
 12-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:6:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -29,7 +29,7 @@
 20        android:theme="@style/AppTheme" >
 20-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:11:9-40
 21        <activity android:name="com.jemena.maintenance.activity.MenuActivity" >
-21-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:9-18:20
+21-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:9-19:20
 21-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:12:19-56
 22            <intent-filter>
 22-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:13:13-17:29
@@ -43,8 +43,17 @@
 26            </intent-filter>
 27        </activity>
 28        <activity android:name="com.jemena.maintenance.activity.RadioPromptActivity" />
-28-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:19:9-65
-28-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:19:19-63
-29    </application>
-30
-31</manifest>
+28-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:20:9-65
+28-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:20:19-63
+29        <activity android:name="com.jemena.maintenance.activity.RadioPromptCreateActivity" />
+29-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:21:9-71
+29-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:21:19-69
+30        <activity android:name="com.jemena.maintenance.activity.MainActivity" />
+30-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:22:9-58
+30-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:22:19-56
+31        <activity android:name="com.jemena.maintenance.activity.FormActivity" />
+31-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:23:9-58
+31-->C:\Users\morga\Documents\gitbash\jemena-app\app\src\main\AndroidManifest.xml:23:19-56
+32    </application>
+33
+34</manifest>
