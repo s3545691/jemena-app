@@ -1,4 +1,4 @@
-#Thu May 21 23:39:22 AEST 2020
-base.0=C\:\\Users\\morga\\Documents\\gitbash\\jemena-app\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
+#Fri May 22 00:08:41 AEST 2020
+base.0=C\:\\Documents\\University\\Yr3Sem1\\SEP\\GitSource\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

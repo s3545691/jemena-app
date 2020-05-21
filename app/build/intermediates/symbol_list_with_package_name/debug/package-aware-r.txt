@@ -696,6 +696,7 @@ id alertTitle
 id all
 id always
 id async
+id back_button
 id barrier
 id beginning
 id blocking
@@ -727,15 +728,18 @@ id end
 id expand_activities_button
 id expanded_menu
 id fill
+id fill_button
 id fill_horizontal
 id fill_vertical
 id forever
 id formName
+id form_description
 id form_list
 id form_title
 id gone
 id group_divider
 id groups
+id heading
 id home
 id homeAsUp
 id icon
@@ -864,6 +868,8 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout existing_form_item
+layout existing_form_list
 layout form
 layout form_list
 layout form_listing
