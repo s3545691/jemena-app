@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +37,9 @@ public class ExistingFormListActivity extends AppCompatActivity {
     }
 
     private void generateSampleData() {
+        formTitles = new ArrayList<>();
+        forms = new HashMap<>();
+
         formTitles.add("Form 1");
         formTitles.add("Form 2");
         formTitles.add("Form 3");
@@ -48,7 +52,6 @@ public class ExistingFormListActivity extends AppCompatActivity {
     private void configInterface() {
         list = this.findViewById(R.id.form_list);
 
-        formTitles = new ArrayList();
         adapter = new FormListAdapter(this, R.id.form_list, formTitles);
         list.setAdapter(adapter);
 
@@ -99,7 +102,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
 
         private void configureFillButton(View convertView, int position) {
-            ImageButton closeButton = convertView.findViewById(R.id.fill_button);
+            Button closeButton = convertView.findViewById(R.id.fill_button);
             closeButton.setTag(position);
 
             closeButton.setOnClickListener(new View.OnClickListener() {

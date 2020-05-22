@@ -11,7 +11,7 @@
 9-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml
 10
 11    <application
-11-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:5:5-24:19
+11-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:5:5-25:19
 12        android:allowBackup="true"
 12-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:6:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -54,6 +54,9 @@
 31        <activity android:name="com.jemena.maintenance.activity.FormActivity" />
 31-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:23:9-58
 31-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:23:19-56
-32    </application>
-33
-34</manifest>
+32        <activity android:name="com.jemena.maintenance.activity.ExistingFormListActivity" />
+32-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:24:9-70
+32-->C:\Documents\University\Yr3Sem1\SEP\GitSource\app\src\main\AndroidManifest.xml:24:19-68
+33    </application>
+34
+35</manifest>

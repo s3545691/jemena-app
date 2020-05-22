@@ -51,12 +51,7 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         public void openActivityViewForm() {
-            Intent intent = new Intent(this, FormActivity.class);
-            startActivity(intent);
-        }
-
-        public void openActivityFillForm() {
-            Intent intent = new Intent(this, FormActivity.class);
+            Intent intent = new Intent(this, ExistingFormListActivity.class);
             startActivity(intent);
         }
     }

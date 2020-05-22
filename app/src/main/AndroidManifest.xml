@@ -21,6 +21,7 @@
         <activity android:name=".activity.RadioPromptCreateActivity"/>
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.FormActivity"/>
+        <activity android:name=".activity.ExistingFormListActivity"/>
     </application>
 
 </manifest>
