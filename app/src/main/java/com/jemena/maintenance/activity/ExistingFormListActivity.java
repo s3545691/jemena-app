@@ -1,7 +1,6 @@
 package com.jemena.maintenance.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,9 +63,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goBack();
-
-
+                //TODO
             }
         });
     }
@@ -111,14 +108,9 @@ public class ExistingFormListActivity extends AppCompatActivity {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    goBack();
-
-
+                    //TODO
                 }
             });
         }
-    }
-    public void goBack() {
-        startActivity(new Intent(ExistingFormListActivity.this, MenuActivity.class));
     }
 }
