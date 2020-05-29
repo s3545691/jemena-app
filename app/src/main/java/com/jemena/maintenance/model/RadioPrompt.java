@@ -1,9 +1,12 @@
 package com.jemena.maintenance.model;
 
 import android.content.Context;
+import android.util.JsonWriter;
 
 import com.jemena.maintenance.view.form_component_factory.RadioPromptViewFactory;
 
+
+import org.json.*;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,11 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
     @Override
     protected ArrayList<String> instantiateEmptyOptions() {
         return new ArrayList<String>();
+    }
+
+    @Override
+    public JSONObject toJSON() {
+
     }
 
     @Override
