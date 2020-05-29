@@ -2,7 +2,10 @@ package com.jemena.maintenance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +13,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
+import com.jemena.maintenance.model.persistence.DataStorage;
+import com.jemena.maintenance.model.persistence.FormDbHelper;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,11 +76,38 @@ public class FormActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                saveForm();
             }
         });
 
         configAddPromptList();
+
+    }
+
+    private void saveForm() {
+        // TODO check for input form already
+
+        FormDbHelper dbHelper = new FormDbHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        JSONArray JSONComponents = new JSONArray();
+
+        for (FormComponent component : components) {
+            JSONComponents.put(component.toJSON());
+        }
+
+        TextView title = findViewById(R.id.form_title);
+
+        values.put(DataStorage.FormEntry.COLUMN_NAME_TITLE, title.getText().toString());
+        values.put(DataStorage.FormEntry.COLUMN_NAME_DESCRIPTION, ""/* TODO add description to get */ );
+        values.put(DataStorage.FormEntry.COLUMN_NAME_JSON, JSONComponents.toString());
+
+        db.insert(DataStorage.FormEntry.TABLE_NAME, null, values);
+
+
+        startActivity(new Intent(this, MenuActivity.class));
 
     }
 
