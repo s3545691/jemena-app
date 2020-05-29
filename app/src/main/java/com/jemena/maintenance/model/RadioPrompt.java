@@ -37,7 +37,16 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
 
     @Override
     public JSONObject toJSON() {
-
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("prompt", getPrompt());
+            obj.put("response", getResponse());
+            obj.put("options", getOptions());
+        }
+        catch (JSONException e) {
+            System.out.println(e.getMessage());
+        }
+        return obj;
     }
 
     @Override
