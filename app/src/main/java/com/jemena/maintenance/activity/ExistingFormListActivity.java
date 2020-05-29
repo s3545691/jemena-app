@@ -142,7 +142,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
             title.setTag(position);
             // TODO Get Description from the database
             TextView description = convertView.findViewById(R.id.form_description);
-            description.setText(forms.get(formTitles.get(position)));
+            //description.setText(forms.get(formTitles.get(position)));
 
         }
 
