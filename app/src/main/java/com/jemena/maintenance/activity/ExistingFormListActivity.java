@@ -1,6 +1,7 @@
 package com.jemena.maintenance.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -104,9 +105,13 @@ public class ExistingFormListActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                goBack();
             }
         });
+    }
+
+    private void goBack() {
+        startActivity(new Intent(ExistingFormListActivity.this, MenuActivity.class));
     }
 
     private class FormListAdapter extends ArrayAdapter<String> {
