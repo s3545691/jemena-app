@@ -56,3 +56,5 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    // Close the database connection when the app closes
+

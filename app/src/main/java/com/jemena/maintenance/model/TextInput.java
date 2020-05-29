@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.jemena.maintenance.view.form_component_factory.TextInputViewFactory;
 
+import org.json.JSONObject;
+
 public class TextInput extends FormComponent<Void, String> {
     String response;
 
@@ -18,6 +20,12 @@ public class TextInput extends FormComponent<Void, String> {
 
     @Override
     protected Void instantiateEmptyOptions() {
+        return null;
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        // Fill in here Erick :)
         return null;
     }
 

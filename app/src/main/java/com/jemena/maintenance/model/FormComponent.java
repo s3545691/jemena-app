@@ -3,6 +3,7 @@ package com.jemena.maintenance.model;
 import android.content.Context;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import org.json.JSONObject;
 
 import com.jemena.maintenance.view.form_component_factory.FormViewFactory;
 
@@ -58,6 +59,7 @@ public abstract class FormComponent<T, S> {
 
     public void setPrompt(String prompt) {
         this.prompt = prompt;
+
         notifyAdapter();
     }
 
@@ -102,4 +104,6 @@ public abstract class FormComponent<T, S> {
     public abstract String getStringResponse();
 
     protected abstract T instantiateEmptyOptions();
+
+    public abstract JSONObject toJSON();
 }
