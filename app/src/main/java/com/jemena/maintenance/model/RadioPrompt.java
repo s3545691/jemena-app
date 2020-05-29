@@ -37,6 +37,7 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
 
     @Override
     public JSONObject toJSON() {
+        return null;
 
     }
 
