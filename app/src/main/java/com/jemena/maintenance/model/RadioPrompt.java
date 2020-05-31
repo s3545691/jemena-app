@@ -1,14 +1,19 @@
 package com.jemena.maintenance.model;
 
 import android.content.Context;
-import android.util.JsonWriter;
 
 import com.jemena.maintenance.view.form_component_factory.RadioPromptViewFactory;
-
+import static com.jemena.maintenance.model.persistence.Constants.OPTIONS;
+import static com.jemena.maintenance.model.persistence.Constants.RESPONSE;
+import static com.jemena.maintenance.model.persistence.Constants.PROMPT;
+import static com.jemena.maintenance.model.persistence.Constants.TYPE;
+import static com.jemena.maintenance.model.persistence.Constants.RADIO;
 
 import org.json.*;
 
 import java.util.ArrayList;
+
+
 
 public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
 
@@ -39,9 +44,10 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         try {
-            obj.put("prompt", getPrompt());
-            obj.put("response", getResponse());
-            obj.put("options", getOptions());
+            obj.put(PROMPT, getPrompt());
+            obj.put(RESPONSE, getResponse());
+            obj.put(OPTIONS, getOptions());
+            obj.put(TYPE, RADIO);
         }
         catch (JSONException e) {
             System.out.println(e.getMessage());

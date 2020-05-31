@@ -3,6 +3,10 @@ package com.jemena.maintenance.model;
 import android.content.Context;
 
 import com.jemena.maintenance.view.form_component_factory.TextInputViewFactory;
+import static com.jemena.maintenance.model.persistence.Constants.PROMPT;
+import static com.jemena.maintenance.model.persistence.Constants.TYPE;
+import static com.jemena.maintenance.model.persistence.Constants.RESPONSE;
+import static com.jemena.maintenance.model.persistence.Constants.TEXT;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +32,9 @@ public class TextInput extends FormComponent<Void, String> {
     public JSONObject toJSON() {
         JSONObject returnValue = new JSONObject();
         try {
-            returnValue.put("type", "Text");
-            returnValue.put("prompt", getPrompt());
-            returnValue.put("response", response);
+            returnValue.put(TYPE, TEXT);
+            returnValue.put(PROMPT, getPrompt());
+            returnValue.put(RESPONSE, response);
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }
