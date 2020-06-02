@@ -31,11 +31,8 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openActivityCreateForm();
-
-
             }
         });
-
 
         viewFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,17 +41,30 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-           }
+        Button editButton = findViewById(R.id.edit_form);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openEditFormMenu();
+            }
+        });
+    }
 
-        public void openActivityCreateForm() {
+        private void openActivityCreateForm() {
             startActivity(new Intent(MenuActivity.this, FormActivity.class));
         }
 
-        public void openActivityViewForm() {
+        private void openActivityViewForm() {
             Intent intent = new Intent(this, ExistingFormListActivity.class);
+            startActivity(intent);
+        }
+
+        private void openEditFormMenu() {
+            Intent intent = new Intent(this, ExistingFormListActivity.class);
+            intent.putExtra("isFill", false);
             startActivity(intent);
         }
     }
 
-    // Close the database connection when the app closes
+    // TODO Close the database connection when the app closes
 

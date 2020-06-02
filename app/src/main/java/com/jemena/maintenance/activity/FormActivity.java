@@ -46,6 +46,8 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form);
 
+        // TODO: Check extras to see if editing an existing form, in which case load up the necessary data from the database
+
         // Set attributes
         components = new ArrayList<>();
         addPromptList = findViewById(R.id.add_prompt_list);

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,11 +33,20 @@ public class ExistingFormListActivity extends AppCompatActivity {
     FormListAdapter adapter;
     ListView list;
     Button backButton;
+    private boolean isFill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.existing_form_list);
+
+        isFill = getIntent().getBooleanExtra("isFill", true);
+
+        // Change the heading if need be
+        if (!isFill) {
+            TextView header = findViewById(R.id.heading);
+            header.setText("Edit Form");
+        }
 
         dbHelper = new FormDbHelper(this);
         formsDb = dbHelper.getReadableDatabase();
@@ -44,6 +54,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
         configInterface();
     }
 
+    // TODO: Separate all this into a helper class that just returns the ArrayList<HashMap>. Keep database code separated
     private void initFormData() {
 
         String[] projection = {
@@ -106,25 +117,35 @@ public class ExistingFormListActivity extends AppCompatActivity {
         });
     }
 
-    private class FormListAdapter extends ArrayAdapter<HashMap<String,String>> {
-        private LayoutInflater inflater;
 
-        public FormListAdapter(Context context, int textViewResourceId, List<HashMap<String, String>> forms) {
+    private class FormListAdapter extends ArrayAdapter<HashMap<String,String>> {
+
+        private LayoutInflater inflater;
+        private final Class activityToLaunch = isFill ? FillFormActivity.class : FormActivity.class;
+
+        public FormListAdapter(Context context, int textViewResourceId,
+                               List<HashMap<String, String>> forms) {
+
             super(context, textViewResourceId, forms);
             inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            int layoutId = isFill ? R.layout.existing_form_item : R.layout.existing_form_item_edit;
 
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.existing_form_item, null);
+                convertView = inflater.inflate(layoutId, null);
             }
 
             HashMap<String, String> formMap = getItem(position);
 
             configureText(convertView, formMap);
-            configureFillButton(convertView, formMap);
+            configureMainButton(convertView, formMap);
+
+            if (!isFill) {
+                configDeleteButton(convertView, formMap);
+            }
 
             return convertView;
         }
@@ -139,18 +160,34 @@ public class ExistingFormListActivity extends AppCompatActivity {
         }
 
 
-        private void configureFillButton(View convertView, HashMap<String,String> form) {
-            Button fillButton = convertView.findViewById(R.id.fill_button);
-            fillButton.setTag(form.get("id"));
+        private void configureMainButton(View convertView, HashMap<String,String> form) {
 
-            fillButton.setOnClickListener(new View.OnClickListener() {
+            int buttonId = isFill ? R.id.fill_button : R.id.edit_button;
+            Button button = convertView.findViewById(buttonId);
+            button.setTag(form.get("id"));
+
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     long id = Long.valueOf((String)view.getTag());
 
-                    Intent intent = new Intent(view.getContext(), FillFormActivity.class);
+                    Intent intent = new Intent(view.getContext(), activityToLaunch);
                     intent.putExtra("id", id);
                     startActivity(intent);
+                }
+            });
+        }
+
+        private void configDeleteButton(View view, HashMap<String,String> form) {
+
+            ImageButton button = view.findViewById(R.id.delete_button);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    long id = Long.valueOf((String)view.getTag());
+
+                    // TODO: Delete form from db. Ideally use helper class, keep database code out of this class
                 }
             });
         }
