@@ -1,6 +1,7 @@
 package com.jemena.maintenance.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.model.Form;
 import com.jemena.maintenance.model.persistence.DataStorage;
 import com.jemena.maintenance.model.persistence.FormDbHelper;
 
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ExistingFormListActivity extends AppCompatActivity {
     ArrayList<String> formTitles;
-    ArrayList<HashMap> forms;
+    ArrayList<HashMap<String,String>> forms;
     FormDbHelper dbHelper;
     SQLiteDatabase formsDb;
     FormListAdapter adapter;
@@ -40,11 +40,11 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
         dbHelper = new FormDbHelper(this);
         formsDb = dbHelper.getReadableDatabase();
-        generateSampleData();
+        initFormData();
         configInterface();
     }
 
-    private void generateSampleData() {
+    private void initFormData() {
 
         String[] projection = {
                 BaseColumns._ID,
@@ -90,7 +90,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
         list = this.findViewById(R.id.form_list);
 
-        adapter = new FormListAdapter(this, R.id.form_list, formTitles);
+        adapter = new FormListAdapter(this, R.id.form_list, forms);
         list.setAdapter(adapter);
 
         configureBackButton();
@@ -101,20 +101,15 @@ public class ExistingFormListActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goBack();
+                finish();
             }
         });
     }
 
-    private void goBack() {
-        // startActivity(new Intent(ExistingFormListActivity.this, MenuActivity.class));
-        finish();
-    }
-
-    private class FormListAdapter extends ArrayAdapter<String> {
+    private class FormListAdapter extends ArrayAdapter<HashMap<String,String>> {
         private LayoutInflater inflater;
 
-        public FormListAdapter(Context context, int textViewResourceId, List<String> forms) {
+        public FormListAdapter(Context context, int textViewResourceId, List<HashMap<String, String>> forms) {
             super(context, textViewResourceId, forms);
             inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -126,32 +121,36 @@ public class ExistingFormListActivity extends AppCompatActivity {
                 convertView = inflater.inflate(R.layout.existing_form_item, null);
             }
 
-            configureText(convertView, position);
-            configureFillButton(convertView, position);
+            HashMap<String, String> formMap = getItem(position);
+
+            configureText(convertView, formMap);
+            configureFillButton(convertView, formMap);
 
             return convertView;
         }
 
 
-        private void configureText(View convertView, int position) {
+        private void configureText(View convertView, HashMap<String, String> form) {
             TextView title = convertView.findViewById(R.id.form_title);
-            title.setText(formTitles.get(position));
-            title.setTag(position);
-            // TODO Get Description from the database
-            TextView description = convertView.findViewById(R.id.form_description);
-            //description.setText(forms.get(formTitles.get(position)));
+            title.setText(form.get("title"));
 
+            TextView description = convertView.findViewById(R.id.form_description);
+            description.setText(form.get("desc"));
         }
 
 
-        private void configureFillButton(View convertView, int position) {
-            Button closeButton = convertView.findViewById(R.id.fill_button);
-            closeButton.setTag(position);
+        private void configureFillButton(View convertView, HashMap<String,String> form) {
+            Button fillButton = convertView.findViewById(R.id.fill_button);
+            fillButton.setTag(form.get("id"));
 
-            closeButton.setOnClickListener(new View.OnClickListener() {
+            fillButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO
+                    long id = Long.valueOf((String)view.getTag());
+
+                    Intent intent = new Intent(view.getContext(), FillFormActivity.class);
+                    intent.putExtra("id", id);
+                    startActivity(intent);
                 }
             });
         }
