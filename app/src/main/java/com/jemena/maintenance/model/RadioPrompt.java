@@ -46,8 +46,10 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
         try {
             obj.put(PROMPT, getPrompt());
             obj.put(RESPONSE, getResponse());
-            obj.put(OPTIONS, getOptions());
             obj.put(TYPE, RADIO);
+
+            JSONArray optionsJson = new JSONArray(getOptions());
+            obj.put(OPTIONS, optionsJson);
         }
         catch (JSONException e) {
             System.out.println(e.getMessage());

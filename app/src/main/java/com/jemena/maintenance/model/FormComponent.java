@@ -106,4 +106,5 @@ public abstract class FormComponent<T, S> {
     protected abstract T instantiateEmptyOptions();
 
     public abstract JSONObject toJSON();
+
 }
