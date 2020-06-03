@@ -41,7 +41,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.form);
+        setContentView(R.layout.edit_form);
 
         // TODO: Check extras to see if editing an existing form, in which case load up the necessary data from the database
 
@@ -161,6 +161,7 @@ public class FormActivity extends AppCompatActivity {
     private void showAddPromptList(Boolean showAddPromptList) {
         addPromptList.setVisibility(showAddPromptList ? View.VISIBLE : View.GONE);
         addPromptButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
+        saveButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
     }
 
     // The class responsible for taking the data for each component and putting it into a view
