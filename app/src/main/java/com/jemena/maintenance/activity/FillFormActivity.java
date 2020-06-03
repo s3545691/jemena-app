@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.persistence.DataStorage;
-import com.jemena.maintenance.model.persistence.FormDbHelper;
+import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
 
 import java.util.HashMap;
 
@@ -25,48 +25,12 @@ public class FillFormActivity extends AppCompatActivity {
         Intent intent = getIntent();
         long id = intent.getLongExtra("id", 0);
 
-        HashMap<String,String> formMap = getFormMap(id);
-
-
         // Test for intent
         TextView formId = this.findViewById(R.id.formTitle);
-        formId.setText(formMap.get("title"));
-    }
+        formId.setText(intent.getStringExtra("title"));
 
-
-    private HashMap getFormMap(long id) {
-        HashMap<String,String> formMap = new HashMap<>();
-        FormDbHelper dbHelper = new FormDbHelper(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // Setup the WHERE filter
-        String selection = DataStorage.FormEntry._ID + " = ?";
-        String[] args = { String.valueOf(id) };
-
-        Cursor cursor = db.query(
-                DataStorage.FormEntry.TABLE_NAME,   // The table to query
-                null,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                args,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
-        );
-        cursor.moveToNext();
-
-        formMap.put("title",
-                cursor.getString(
-                        cursor.getColumnIndexOrThrow(DataStorage.FormEntry.COLUMN_NAME_TITLE)
-                )
-        );
-        formMap.put("json",
-                cursor.getString(
-                        cursor.getColumnIndexOrThrow(DataStorage.FormEntry.COLUMN_NAME_JSON)
-                )
-        );
-        formMap.put("id", String.valueOf(id));
-
-        return formMap;
+        TextView jsonText = findViewById(R.id.json);
+        jsonText.setText(intent.getStringExtra("json"));
     }
 }
 

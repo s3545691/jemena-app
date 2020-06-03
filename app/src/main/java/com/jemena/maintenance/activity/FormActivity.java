@@ -20,14 +20,11 @@ import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 import com.jemena.maintenance.model.persistence.DataStorage;
-import com.jemena.maintenance.model.persistence.FormDbHelper;
+import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
@@ -89,7 +86,7 @@ public class FormActivity extends AppCompatActivity {
     private void saveForm() {
         // TODO check for input form already
 
-        FormDbHelper dbHelper = new FormDbHelper(this);
+        FormDbOpenHelper dbHelper = new FormDbOpenHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
