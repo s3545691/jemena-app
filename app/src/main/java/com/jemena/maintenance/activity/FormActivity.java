@@ -1,6 +1,8 @@
 package com.jemena.maintenance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -175,9 +178,21 @@ public class FormActivity extends AppCompatActivity {
         // TODO: rework this once more prompt types have been added and allow for recycling
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            FormComponent component = getItem(position);
+            final FormComponent component = getItem(position);
 
             convertView = component.getView();
+
+            // Add the edit button to the component
+            if (!component.isEditing()) {
+                ImageButton editButton = convertView.findViewById(R.id.edit_button);
+                editButton.setVisibility(View.VISIBLE);
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        component.setIsEditing(true);
+                    }
+                });
+            }
             return convertView;
         }
     }

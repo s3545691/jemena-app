@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.view.FormListAdapter;
 
 import java.util.ArrayList;
 
