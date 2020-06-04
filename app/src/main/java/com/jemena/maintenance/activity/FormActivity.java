@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,17 +24,24 @@ import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 import com.jemena.maintenance.model.persistence.DataStorage;
+import com.jemena.maintenance.model.persistence.DbHelper;
 import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
+import com.jemena.maintenance.model.persistence.JsonHelper;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
+
     private ArrayList<FormComponent> components;
     private Button addPromptButton;
     private Button saveButton;
+    private DbHelper dbHelper;
+    private boolean isNew;
+    private EditText title;
 
     // Responsible for displaying each component in the form
     private FormArrayAdapter adapter;
@@ -46,18 +54,52 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_form);
 
-        // TODO: Check extras to see if editing an existing form, in which case load up the necessary data from the database
+        dbHelper = new DbHelper(this);
 
-        // Set attributes
-        components = new ArrayList<>();
+        // Set UI component references
         addPromptList = findViewById(R.id.add_prompt_list);
         addPromptButton = findViewById(R.id.add_prompt_button);
         saveButton = findViewById(R.id.save_button);
+        title = findViewById(R.id.form_title);
+
+        // Check if this form is being newly created
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            isNew = intent.getBooleanExtra("isNew", true);
+        }
+
+        if (!isNew) {
+            // Load the components
+            HashMap<String,String> formMap = dbHelper.getForm(intent.getLongExtra("id", -1));
+            String rawJson = formMap.get("json");
+            JsonHelper jsonHelper = new JsonHelper(this);
+            components = jsonHelper.getComponentList(rawJson);
+
+            title.setText(formMap.get("title"));
+        }
+        else {
+            components = new ArrayList<>();
+        }
+
         adapter = new FormArrayAdapter(this, R.id.component_list,
                 components);
 
+        if (!isNew) {
+            // Set the adapter of all the form components
+            for (FormComponent component : components) {
+                component.setArrayAdapter(adapter);
+            }
+        }
+
         configInterface();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
+    }
+
 
     private void configInterface() {
         // Set the adapter for the list view
@@ -78,40 +120,30 @@ public class FormActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveForm();
+                if (isNew) {
+                    dbHelper.saveForm(title.getText().toString(), components);
+                    finish();
+                }
+                else {
+                    // By this point the intent checks should have been done so no need to redo
+                    long id = getIntent().getLongExtra("id", -1);
+                    assert(id != -1);
+
+                    // TODO: Update the JSON and title of an existing form
+                    HashMap<String,String> formMap = new HashMap<>();
+                    formMap.put("title", title.getText().toString());
+                    formMap.put("id", String.valueOf(id));
+
+                    JsonHelper jsonHelper = new JsonHelper(view.getContext());
+                    formMap.put("json", jsonHelper.arrayListToJson(components).toString());
+
+                    dbHelper.updateForm(id, formMap);
+                }
             }
         });
-
         configAddPromptList();
-
     }
 
-    private void saveForm() {
-        // TODO check for input form already
-
-        FormDbOpenHelper dbHelper = new FormDbOpenHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-        JSONArray JSONComponents = new JSONArray();
-
-        for (FormComponent component : components) {
-            JSONComponents.put(component.toJSON());
-        }
-
-        TextView title = findViewById(R.id.form_title);
-
-        values.put(DataStorage.FormEntry.COLUMN_NAME_TITLE, title.getText().toString());
-        values.put(DataStorage.FormEntry.COLUMN_NAME_DESCRIPTION, ""/* TODO add description to get */ );
-        values.put(DataStorage.FormEntry.COLUMN_NAME_JSON, JSONComponents.toString());
-
-        db.insert(DataStorage.FormEntry.TABLE_NAME, null, values);
-
-
-        startActivity(new Intent(this, MenuActivity.class));
-
-    }
 
     // TODO: Expand as more component types are created
     private void configAddPromptList() {
@@ -160,12 +192,14 @@ public class FormActivity extends AppCompatActivity {
         });
     }
 
+
     // Toggles between showing the add prompt list and the add prompt button
     private void showAddPromptList(Boolean showAddPromptList) {
         addPromptList.setVisibility(showAddPromptList ? View.VISIBLE : View.GONE);
         addPromptButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
         saveButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
     }
+
 
     // The class responsible for taking the data for each component and putting it into a view
     private class FormArrayAdapter extends ArrayAdapter<FormComponent> {
@@ -175,14 +209,14 @@ public class FormActivity extends AppCompatActivity {
             super(context, textViewResourceId, data);
         }
 
-        // TODO: rework this once more prompt types have been added and allow for recycling
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final FormComponent component = getItem(position);
 
+            final FormComponent component = getItem(position);
             convertView = component.getView();
 
-            // Add the edit button to the component
+            // 'Add' the edit button to the component
             if (!component.isEditing()) {
                 ImageButton editButton = convertView.findViewById(R.id.edit_button);
                 editButton.setVisibility(View.VISIBLE);

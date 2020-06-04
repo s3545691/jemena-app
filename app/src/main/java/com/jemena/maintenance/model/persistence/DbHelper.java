@@ -1,9 +1,18 @@
 package com.jemena.maintenance.model.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+import android.widget.TextView;
+
+import com.jemena.maintenance.R;
+import com.jemena.maintenance.activity.MenuActivity;
+import com.jemena.maintenance.model.FormComponent;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,6 +122,42 @@ public class DbHelper {
         String selectionArgs[] = {String.valueOf(id)};
 
         return db.delete(DataStorage.FormEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
+
+    public void saveForm(String formTitle, ArrayList<FormComponent> components) {
+        JsonHelper jsonHelper = new JsonHelper(context);
+        JSONArray JSONComponents = jsonHelper.arrayListToJson(components);
+
+        ContentValues values = new ContentValues();
+        values.put(DataStorage.FormEntry.COLUMN_NAME_TITLE, formTitle);
+        values.put(DataStorage.FormEntry.COLUMN_NAME_DESCRIPTION, ""/* TODO add description to get */ );
+        values.put(DataStorage.FormEntry.COLUMN_NAME_JSON, JSONComponents.toString());
+
+        db.insert(DataStorage.FormEntry.TABLE_NAME, null, values);
+    }
+
+
+    public void updateForm(long id, HashMap<String,String> newValues) {
+
+        ContentValues values = new ContentValues();
+
+        if (newValues.containsKey("title")) {
+            values.put(DataStorage.FormEntry.COLUMN_NAME_TITLE, newValues.get("title"));
+        }
+        if (newValues.containsKey("json")) {
+            values.put(DataStorage.FormEntry.COLUMN_NAME_JSON, newValues.get("json"));
+        }
+
+        String selection = DataStorage.FormEntry._ID + " LIKE ?";
+        String selectionArgs[] = { String.valueOf(id) };
+
+        db.update(
+                DataStorage.FormEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs
+        );
     }
 
 

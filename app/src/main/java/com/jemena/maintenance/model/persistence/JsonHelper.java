@@ -123,4 +123,13 @@ public class JsonHelper {
 
         return prompts;
     }
+
+
+    public JSONArray arrayListToJson(ArrayList<FormComponent> components) {
+        JSONArray JSONComponents = new JSONArray();
+        for (FormComponent component : components) {
+            JSONComponents.put(component.toJSON());
+        }
+        return JSONComponents;
+    }
 }

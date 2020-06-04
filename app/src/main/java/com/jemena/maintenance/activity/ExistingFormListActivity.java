@@ -129,8 +129,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), activityToLaunch);
                     intent.putExtra("id", id);
-                    intent.putExtra("title", form.get("title"));
-                    intent.putExtra("json", form.get("json"));
+                    intent.putExtra("isNew", false);
                     startActivity(intent);
                 }
             });

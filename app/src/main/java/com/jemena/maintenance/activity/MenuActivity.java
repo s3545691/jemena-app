@@ -48,7 +48,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 
         private void openActivityCreateForm() {
-            startActivity(new Intent(MenuActivity.this, FormActivity.class));
+
+            Intent intent = new Intent(this, FormActivity.class);
+            intent.putExtra("isNew", true);
+
+            startActivity(intent);
         }
 
         private void openActivityViewForm() {
