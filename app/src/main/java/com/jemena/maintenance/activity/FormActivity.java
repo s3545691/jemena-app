@@ -36,6 +36,10 @@ import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
 
+
+    private static final boolean DIRECTION_UP = true;
+    private static final boolean DIRECTION_DOWN = false;
+
     private ArrayList<FormComponent> components;
     private Button addPromptButton;
     private Button saveButton;
@@ -200,6 +204,19 @@ public class FormActivity extends AppCompatActivity {
         saveButton.setVisibility(showAddPromptList ? View.GONE : View.VISIBLE);
     }
 
+    public void movePrompt(boolean direction, int position) {
+        int targetPosition = (direction)?position-1:position+1;
+
+        FormComponent original = components.get(position);
+        FormComponent swapTarget = components.get(targetPosition);
+
+
+        components.add(position, swapTarget);
+        components.remove(position+1);
+        components.add(targetPosition, original);
+        components.remove(targetPosition+1);
+        adapter.notifyDataSetChanged();
+    }
 
     // The class responsible for taking the data for each component and putting it into a view
     private class FormArrayAdapter extends ArrayAdapter<FormComponent> {
@@ -211,7 +228,7 @@ public class FormActivity extends AppCompatActivity {
 
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             final FormComponent component = getItem(position);
             convertView = component.getView();
@@ -226,6 +243,24 @@ public class FormActivity extends AppCompatActivity {
                         component.setIsEditing(true);
                     }
                 });
+            } else {
+                ImageButton upButton = convertView.findViewById(R.id.up_button);
+                upButton.setVisibility((position==0)?View.GONE:View.VISIBLE);
+                upButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        movePrompt(DIRECTION_UP, position);
+                    }
+                });
+                ImageButton downButton = convertView.findViewById(R.id.down_button);
+                downButton.setVisibility((position==components.size()-1)?View.GONE:View.VISIBLE);
+                downButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        movePrompt(DIRECTION_DOWN, position);
+                    }
+                });
+
             }
             return convertView;
         }
