@@ -12,20 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MenuActivity">
+        <activity android:name=".activity.user"></activity>
+        <activity android:name=".activity.admin" />
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".activity.RadioPromptActivity"/>
-        <activity android:name=".activity.RadioPromptCreateActivity"/>
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.FormActivity"/>
-        <activity android:name=".activity.ExistingFormListActivity"/>
-        <activity android:name=".activity.FillFormActivity"/>
+        <activity android:name=".activity.RadioPromptActivity" />
+        <activity android:name=".activity.RadioPromptCreateActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MenuActivity" />
+        <activity android:name=".activity.TechActivity" />
+        <activity android:name=".activity.FormActivity" />
+        <activity android:name=".activity.ExistingFormListActivity" />
+        <activity android:name=".activity.FillFormActivity" />
     </application>
 
 </manifest>

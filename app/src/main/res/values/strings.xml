@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Maintenance</string>
     <string name="new_form_button">New Form </string>
+    <string-array name="userType">
+        <item>user</item>
+        <item>admin</item>
+    </string-array>
 </resources>
