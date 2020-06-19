@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>> forms;
     DbHelper dbHelper;
     FormListAdapter adapter;
+    EditText searchBar;
 
     private boolean isFill;
 
@@ -48,6 +50,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
         forms = dbHelper.getFormList();
+
         configInterface();
     }
 
@@ -69,6 +72,43 @@ public class ExistingFormListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        // Configure the search bar
+        searchBar = findViewById(R.id.searchbar);
+        ImageButton searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Reset the forms list in case passed searches have already filtered
+                ArrayList<HashMap<String,String>> formsBackup = dbHelper.getFormList();
+
+                for (HashMap<String,String> form : formsBackup) {
+                    if (!forms.contains(form)) {
+                        forms.add(form);
+                    }
+                }
+
+                final String searchTerm = searchBar.getText().toString().toLowerCase();
+
+                if (searchTerm.isEmpty()) {
+                    adapter.notifyDataSetChanged();
+                    return;
+                }
+
+                ArrayList<HashMap> toRemove = new ArrayList();
+                for (HashMap<String,String> formMap : forms) {
+                    String formTitle = formMap.get("title").toLowerCase();
+
+                    if (!formTitle.contains(searchTerm)) {
+                        toRemove.add(formMap);
+                    }
+                }
+                for (HashMap map : toRemove) {
+                    forms.remove(map);
+                }
+                adapter.notifyDataSetChanged();
             }
         });
     }
