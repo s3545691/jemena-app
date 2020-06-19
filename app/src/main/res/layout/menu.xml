@@ -29,21 +29,21 @@
 
         <Button
             android:id="@+id/create_form"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Create Form" />
 
         <Button
             android:id="@+id/edit_form"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Edit Form" />
 
         <Button
             android:id="@+id/view_form"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="View Form" />
