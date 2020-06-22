@@ -16,6 +16,7 @@ public class TextInput extends FormComponent<Void, String> {
 
     public TextInput(Context context, String prompt, Boolean isEditing) {
         super(context, prompt, isEditing, new TextInputViewFactory(context), null);
+        setResponse("");
     }
 
     @Override

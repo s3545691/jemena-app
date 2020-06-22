@@ -26,8 +26,8 @@ public class ExistingFormListActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>> forms;
     DbHelper dbHelper;
     FormListAdapter adapter;
-
     private boolean isFill;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
         configInterface();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -69,7 +70,6 @@ public class ExistingFormListActivity extends AppCompatActivity {
             }
         });
 
-        // Configure the search bar
         SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper);
     }
 
@@ -129,14 +129,14 @@ public class ExistingFormListActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), activityToLaunch);
                     intent.putExtra("id", id);
-                    intent.putExtra("isNew", false);
+                    intent.putExtra("isNew", isFill);
                     startActivity(intent);
                 }
             });
         }
 
-        private void configDeleteButton(View view, HashMap<String,String> form, final int position) {
 
+        private void configDeleteButton(View view, HashMap<String,String> form, final int position) {
             ImageButton button = view.findViewById(R.id.delete_button);
             button.setTag(form.get("id"));
 

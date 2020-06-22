@@ -11,31 +11,25 @@ import com.jemena.maintenance.R;
 
 public class TechActivity extends AppCompatActivity {
 
-    private Button createFormButton;
-    private Button viewFormButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tech);
 
-        // Set attributes
-        viewFormButton = (Button) findViewById(R.id.view_form);
+        Button fillNewForm = findViewById(R.id.fill_new_form);
 
-        viewFormButton.setOnClickListener(new View.OnClickListener() {
+        fillNewForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openActivityViewForm();
+                openActivityFillNewForm();
             }
         });
     }
 
 
-        private void openActivityViewForm() {
+        private void openActivityFillNewForm() {
             Intent intent = new Intent(this, ExistingFormListActivity.class);
             startActivity(intent);
         }
     }
-
-    // TODO Close the database connection when the app closes
 
