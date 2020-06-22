@@ -2,16 +2,12 @@ package com.jemena.maintenance.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,9 +15,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.model.persistence.DataStorage;
 import com.jemena.maintenance.model.persistence.DbHelper;
-import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
+import com.jemena.maintenance.view.SearchBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +26,6 @@ public class ExistingFormListActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>> forms;
     DbHelper dbHelper;
     FormListAdapter adapter;
-    EditText searchBar;
 
     private boolean isFill;
 
@@ -76,41 +70,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
         });
 
         // Configure the search bar
-        searchBar = findViewById(R.id.searchbar);
-        ImageButton searchButton = findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Reset the forms list in case passed searches have already filtered
-                ArrayList<HashMap<String,String>> formsBackup = dbHelper.getFormList();
-
-                for (HashMap<String,String> form : formsBackup) {
-                    if (!forms.contains(form)) {
-                        forms.add(form);
-                    }
-                }
-
-                final String searchTerm = searchBar.getText().toString().toLowerCase();
-
-                if (searchTerm.isEmpty()) {
-                    adapter.notifyDataSetChanged();
-                    return;
-                }
-
-                ArrayList<HashMap> toRemove = new ArrayList();
-                for (HashMap<String,String> formMap : forms) {
-                    String formTitle = formMap.get("title").toLowerCase();
-
-                    if (!formTitle.contains(searchTerm)) {
-                        toRemove.add(formMap);
-                    }
-                }
-                for (HashMap map : toRemove) {
-                    forms.remove(map);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
+        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper);
     }
 
 
