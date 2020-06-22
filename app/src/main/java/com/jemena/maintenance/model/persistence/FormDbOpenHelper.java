@@ -14,13 +14,15 @@ public class FormDbOpenHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DataStorage.SQL_CREATE_ENTRIES);
+        db.execSQL(DataStorage.SQL_CREATE_FORMS_TABLE);
+        db.execSQL(DataStorage.SQL_CREATE_FILLED_FORMS_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
-        db.execSQL(DataStorage.SQL_DELETE_ENTRIES);
+        db.execSQL(DataStorage.SQL_DELETE_FORMS_TABLE);
+        db.execSQL(DataStorage.SQL_DELETE_FILLED_FORMS_TABLE);
         onCreate(db);
     }
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
-import com.jemena.maintenance.model.persistence.Constants;
 
 import org.json.*;
 

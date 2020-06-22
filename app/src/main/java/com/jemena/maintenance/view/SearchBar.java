@@ -85,10 +85,12 @@ public class SearchBar {
     private void resetFormsList() {
         ArrayList<HashMap<String,String>> formsBackup = dbHelper.getFormList();
 
+        for (HashMap form : forms) {
+            forms.remove(form);
+        }
+
         for (HashMap<String,String> form : formsBackup) {
-            if (!forms.contains(form)) {
-                forms.add(form);
-            }
+            forms.add(form);
         }
         adapter.notifyDataSetChanged();
     }

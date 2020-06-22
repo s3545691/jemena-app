@@ -1,13 +1,9 @@
 package com.jemena.maintenance.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
-import com.jemena.maintenance.model.persistence.DataStorage;
 import com.jemena.maintenance.model.persistence.DbHelper;
-import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,7 +117,6 @@ public class FormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isNew) {
                     dbHelper.saveForm(title.getText().toString(), components);
-                    finish();
                 }
                 else {
                     // By this point the intent checks should have been done so no need to redo
@@ -143,6 +133,7 @@ public class FormActivity extends AppCompatActivity {
 
                     dbHelper.updateForm(id, formMap);
                 }
+                finish();
             }
         });
         configAddPromptList();

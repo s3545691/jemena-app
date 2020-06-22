@@ -12,15 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.FormComponent;
-import com.jemena.maintenance.model.persistence.DataStorage;
-import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class FillFormActivity extends AppCompatActivity {
 
