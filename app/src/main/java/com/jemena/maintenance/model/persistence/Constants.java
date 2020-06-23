@@ -6,6 +6,7 @@ public final class Constants {
     // JSON type constants
     public static final String RADIO = "RADIO";
     public static final String TEXT = "TEXT";
+    public static final String PAGE_BREAK = "PAGE_BREAK";
 
     // JSON attribute constants
     public static final String TYPE = "TYPE";

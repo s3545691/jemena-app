@@ -3,6 +3,7 @@ package com.jemena.maintenance.model.persistence;
 import android.content.Context;
 
 import com.jemena.maintenance.model.FormComponent;
+import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 
@@ -74,6 +75,10 @@ public class JsonHelper {
         return textInput;
     }
 
+    public PageBreak toPageBreak(JSONObject pageBreakJson) {
+        return new PageBreak(context);
+    }
+
 
     public ArrayList<String> toArrayList(JSONArray jsonArr) {
 
@@ -112,12 +117,15 @@ public class JsonHelper {
                     case Constants.TEXT:
                         prompts.add(toTextInput(currObj));
                         break;
+
+                    case Constants.PAGE_BREAK:
+                        prompts.add(toPageBreak(currObj));
+                        break;
                 }
             }
             catch(JSONException e) {
                 System.out.println(e.getMessage());
-                continue;
-            }
+           }
         }
 
         return prompts;
