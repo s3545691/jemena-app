@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
+import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 import com.jemena.maintenance.model.persistence.DbHelper;
@@ -172,6 +173,20 @@ public class FormActivity extends AppCompatActivity {
                 );
                 textInput.setArrayAdapter(adapter);
                 components.add(textInput);
+                adapter.notifyDataSetChanged();
+
+                showAddPromptList(false);
+            }
+        });
+
+        Button addPageBreak = findViewById(R.id.add_page_break);
+        addPageBreak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new TextInput prompt
+                PageBreak pageBreak = new PageBreak(view.getContext());
+                pageBreak.setArrayAdapter(adapter);
+                components.add(pageBreak);
                 adapter.notifyDataSetChanged();
 
                 showAddPromptList(false);
