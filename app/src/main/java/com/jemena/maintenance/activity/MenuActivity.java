@@ -13,17 +13,13 @@ import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button createFormButton;
-    private Button viewFormButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
         // Set attributes
-        createFormButton = (Button) findViewById(R.id.create_form);
-        viewFormButton = (Button) findViewById(R.id.view_form);
+        Button createFormButton = (Button) findViewById(R.id.create_form);
         createFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,12 +27,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        viewFormButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivityViewForm();
-            }
-        });
 
         Button editButton = findViewById(R.id.edit_form);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -55,17 +45,10 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        private void openActivityViewForm() {
-            Intent intent = new Intent(this, ExistingFormListActivity.class);
-            startActivity(intent);
-        }
-
         private void openEditFormMenu() {
             Intent intent = new Intent(this, ExistingFormListActivity.class);
             intent.putExtra("isFill", false);
             startActivity(intent);
         }
     }
-
-    // TODO Close the database connection when the app closes
 

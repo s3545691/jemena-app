@@ -102,6 +102,10 @@ public class ExistingFormListActivity extends AppCompatActivity {
             if (!isFill) {
                 configDeleteButton(convertView, formMap, position);
             }
+            else {
+                ImageButton deleteButton = convertView.findViewById(R.id.delete_button);
+                deleteButton.setVisibility(View.GONE);
+            }
 
             return convertView;
         }
@@ -110,9 +114,6 @@ public class ExistingFormListActivity extends AppCompatActivity {
         private void configureText(View convertView, HashMap<String, String> form) {
             TextView title = convertView.findViewById(R.id.form_title);
             title.setText(form.get("title"));
-
-            TextView description = convertView.findViewById(R.id.form_description);
-            description.setText(form.get("desc"));
         }
 
 

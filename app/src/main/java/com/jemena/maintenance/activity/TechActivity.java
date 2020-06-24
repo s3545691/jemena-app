@@ -17,6 +17,7 @@ public class TechActivity extends AppCompatActivity {
         setContentView(R.layout.tech);
 
         Button fillNewForm = findViewById(R.id.fill_new_form);
+        Button editFilledForm = findViewById(R.id.edit_filled_form);
 
         fillNewForm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,12 +25,26 @@ public class TechActivity extends AppCompatActivity {
                 openActivityFillNewForm();
             }
         });
+        editFilledForm.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                openActivityEditFilledForm();
+            }
+        });
     }
 
 
-        private void openActivityFillNewForm() {
-            Intent intent = new Intent(this, ExistingFormListActivity.class);
-            startActivity(intent);
-        }
+    private void openActivityFillNewForm() {
+        Intent intent = new Intent(this, ExistingFormListActivity.class);
+        intent.putExtra("isFill", true);
+        startActivity(intent);
     }
+
+
+    private void openActivityEditFilledForm() {
+        Intent intent = new Intent(this, FilledFormListActivity.class);
+        startActivity(intent);
+    }
+}
 

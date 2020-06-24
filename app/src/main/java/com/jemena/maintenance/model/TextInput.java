@@ -16,7 +16,7 @@ public class TextInput extends FormComponent<Void, String> {
 
     public TextInput(Context context, String prompt, Boolean isEditing) {
         super(context, prompt, isEditing, new TextInputViewFactory(context), null);
-        setResponse("");
+        setResponseNotify("");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class TextInput extends FormComponent<Void, String> {
         try {
             returnValue.put(TYPE, TEXT);
             returnValue.put(PROMPT, getPrompt());
-            returnValue.put(RESPONSE, response);
+            returnValue.put(RESPONSE, getResponse());
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }

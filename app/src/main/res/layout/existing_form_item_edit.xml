@@ -8,23 +8,17 @@
 
     <TextView
         android:id="@+id/form_title"
-        android:layout_width="100dp"
-        android:layout_height="51dp"
-        android:textSize="20sp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:gravity="center"
         android:text="form_title"
         android:textAlignment="textStart"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/form_description"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:gravity="center"
-        android:text="form_description"
-        app:layout_constraintEnd_toStartOf="@+id/delete_button"
-        app:layout_constraintStart_toEndOf="@+id/form_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

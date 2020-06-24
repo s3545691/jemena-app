@@ -81,9 +81,13 @@ public abstract class FormComponent<T, S> {
         return response;
     }
 
-    public void setResponse(S response) {
+    public void setResponseNotify(S response) {
         this.response = response;
         notifyAdapter();
+    }
+
+    public void setResponse(S response) {
+        this.response = response;
     }
 
     public void setArrayAdapter(ArrayAdapter arrayAdapter) {

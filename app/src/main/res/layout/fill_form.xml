@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/form_title" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/save_button"
         android:layout_width="43dp"
         android:layout_height="38dp"
         app:layout_constraintEnd_toEndOf="parent"
