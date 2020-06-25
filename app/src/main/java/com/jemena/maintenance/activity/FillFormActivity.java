@@ -1,8 +1,11 @@
 package com.jemena.maintenance.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -12,12 +15,20 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.FormComponent;
+import com.jemena.maintenance.model.PdfWriter;
 import com.jemena.maintenance.model.persistence.DbHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,6 +98,36 @@ public class FillFormActivity extends AppCompatActivity {
                 saveForm();
             }
         });
+
+        // Configure pdf button
+        ImageButton pdfButton = findViewById(R.id.pdfButton);
+        if (isNew) {
+            pdfButton.setVisibility(View.GONE);
+        }
+        else {
+            pdfButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    savePdf();
+                }
+            });
+        }
+    }
+
+
+    private void savePdf() {
+        String fileName = "test.pdf";
+        File dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        File file = new File("sdcard/Download", fileName);
+
+        // Permissions
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            PdfWriter writer = new PdfWriter();
+            writer.write(findViewById(R.id.root), file);
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
     }
 
 
