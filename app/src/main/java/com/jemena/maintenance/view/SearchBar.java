@@ -20,8 +20,9 @@ public class SearchBar {
     private ArrayAdapter<ArrayList<HashMap<String,String>>> adapter;
     private ArrayList<HashMap<String,String>> forms;
     private DbHelper dbHelper;
+    boolean isFilled;
 
-    public SearchBar(Activity context, ArrayAdapter adapter, ArrayList forms, DbHelper dbHelper) {
+    public SearchBar(Activity context, ArrayAdapter adapter, ArrayList forms, DbHelper dbHelper, boolean isFilled) {
         isSearch = true;
         this.searchBar = context.findViewById(R.id.searchbar);
         this.searchButton = context.findViewById(R.id.searchButton);
@@ -29,6 +30,7 @@ public class SearchBar {
         this.adapter = adapter;
         this.forms = forms;
         this.dbHelper = dbHelper;
+        this.isFilled = isFilled;
 
         clearButton.setVisibility(View.GONE);
         configSearchButton();
@@ -69,7 +71,8 @@ public class SearchBar {
     private void filterForms(String searchTerm) {
         ArrayList<HashMap> toRemove = new ArrayList();
         for (HashMap<String,String> formMap : forms) {
-            String formTitle = formMap.get("title").toLowerCase();
+            String name = isFilled ? "type" : "title";
+            String formTitle = formMap.get(name).toLowerCase();
 
             if (!formTitle.contains(searchTerm)) {
                 toRemove.add(formMap);
@@ -83,12 +86,9 @@ public class SearchBar {
 
 
     private void resetFormsList() {
-        ArrayList<HashMap<String,String>> formsBackup = dbHelper.getFormList();
+        ArrayList<HashMap<String,String>> formsBackup = isFilled ? dbHelper.getFilledFormList() : dbHelper.getFormList();
 
-        for (HashMap form : forms) {
-            forms.remove(form);
-        }
-
+        forms.clear();
         for (HashMap<String,String> form : formsBackup) {
             forms.add(form);
         }

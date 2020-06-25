@@ -36,11 +36,7 @@ public class FilledFormListActivity extends AppCompatActivity {
         dbHelper = new DbHelper(this);
         forms = dbHelper.getFilledFormList();
 
-        adapter = new FilledFormListAdapter(this, R.layout.filled_form_item, forms);
-
-        ListView formList = findViewById(R.id.form_list);
-        formList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        configInterface();
     }
 
 
@@ -58,7 +54,7 @@ public class FilledFormListActivity extends AppCompatActivity {
             }
         });
 
-        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper);
+        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper, true);
     }
 
 

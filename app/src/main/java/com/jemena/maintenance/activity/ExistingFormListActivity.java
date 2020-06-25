@@ -70,7 +70,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
             }
         });
 
-        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper);
+        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper, false);
     }
 
 
