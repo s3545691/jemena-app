@@ -31,9 +31,8 @@ public class PdfWriter {
 
         // Create the first page
         PdfDocument.Page page = createPage();
-        view.layout(0, 0, view.getWidth(), view.getHeight());
+        view.layout(0, 0, height, width);
         view.draw(page.getCanvas());
-        page.getCanvas().translate(0, view.getHeight());
         doc.finishPage(page);
 
         try {

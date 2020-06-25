@@ -116,9 +116,14 @@ public class FillFormActivity extends AppCompatActivity {
 
 
     private void savePdf() {
-        String fileName = "test.pdf";
+        String fileName = title.getText().toString().replace(' ', '_') + ".pdf";
         File dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         File file = new File("sdcard/Download", fileName);
+
+        // Overwrite if it exists already
+        if (file.exists()) {
+            file.delete();
+        }
 
         // Permissions
         if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
