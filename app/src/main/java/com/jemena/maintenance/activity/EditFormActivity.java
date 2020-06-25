@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FormActivity extends AppCompatActivity {
+public class EditFormActivity extends AppCompatActivity {
 
 
     private static final boolean DIRECTION_UP = true;

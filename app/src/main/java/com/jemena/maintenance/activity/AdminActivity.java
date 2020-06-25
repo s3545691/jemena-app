@@ -9,9 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
 
-import java.util.ArrayList;
-
-public class MenuActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
 
         private void openActivityCreateForm() {
 
-            Intent intent = new Intent(this, FormActivity.class);
+            Intent intent = new Intent(this, EditFormActivity.class);
             intent.putExtra("isNew", true);
 
             startActivity(intent);

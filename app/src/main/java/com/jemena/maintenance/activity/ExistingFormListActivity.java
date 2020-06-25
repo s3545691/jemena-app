@@ -77,7 +77,7 @@ public class ExistingFormListActivity extends AppCompatActivity {
     private class FormListAdapter extends ArrayAdapter<HashMap<String,String>> {
 
         private LayoutInflater inflater;
-        private final Class activityToLaunch = isFill ? FillFormActivity.class : FormActivity.class;
+        private final Class activityToLaunch = isFill ? FillFormActivity.class : EditFormActivity.class;
 
         public FormListAdapter(Context context, int textViewResourceId,
                                List<HashMap<String, String>> forms) {

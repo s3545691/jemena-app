@@ -13,9 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
-import com.jemena.maintenance.model.persistence.FormDbOpenHelper;
-
-import java.lang.reflect.Array;
 
 public class LoginActivity extends AppCompatActivity {
     EditText _txtUser, _txtPass;
@@ -37,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String item = _spinner.getSelectedItem().toString();
                 if(_txtUser.getText().toString().equals("admin")&& _txtPass.getText().toString().equals("admin")&& item.equals("admin")){
-                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                     startActivity(intent);
 
                 }else if(_txtUser.getText().toString().equals("admin")&& _txtPass.getText().toString().equals("admin")&& item.equals("user")){
