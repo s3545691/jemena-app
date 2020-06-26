@@ -5,18 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.CheckboxPrompt;
-import com.jemena.maintenance.model.RadioPrompt;
 
 import java.util.ArrayList;
 
@@ -66,6 +64,8 @@ public class CheckboxPromptViewFactory extends FormViewFactory<CheckboxPrompt> {
                         options.set(i, checkboxEditText.getText().toString());
                     }
                 }
+                getComponent().getResponse().add(false);
+
 
                 options.add("Checkbox option text");
                 getComponent().setOptions(options);
@@ -103,7 +103,7 @@ public class CheckboxPromptViewFactory extends FormViewFactory<CheckboxPrompt> {
         ArrayList<String> options = (ArrayList)checkboxPrompt.getOptions();
         View view = inflater.inflate(R.layout.checkbox_prompt, null);
 
-        LinearLayout checkboxGroup = view.findViewById(R.id.checkbox_group);
+        final LinearLayout checkboxGroup = view.findViewById(R.id.checkbox_group);
         TextView prompt = view.findViewById(R.id.prompt);
         prompt.setText(checkboxPrompt.getPrompt());
 
@@ -111,11 +111,33 @@ public class CheckboxPromptViewFactory extends FormViewFactory<CheckboxPrompt> {
         if (options != null) {
             for (int i=0; i < options.size(); i++) {
 
-                CheckBox checkBox = new CheckBox(getContext());
+                final CheckBox checkBox = new CheckBox(getContext());
                 checkBox.setText(options.get(i));
-                checkBox.setId(ViewCompat.generateViewId());
+
+                int buttonId = ViewCompat.generateViewId();
+                checkBox.setId(buttonId);
+
                 checkboxGroup.addView(checkBox);
+
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                            int index = checkboxGroup.indexOfChild(checkBox);
+                            ArrayList<Boolean> response = getComponent().getResponse();
+                            response.set(index, isChecked);
+                            getComponent().setResponse(response);
+                    }
+                });
             }
+
+            ArrayList<Boolean> response = getComponent().getResponse();
+
+            for (int i = 0; i < response.size(); ++i) {
+                CheckBox checkBox = (CheckBox) checkboxGroup.getChildAt(i);
+                    checkBox.setChecked(response.get(i));
+            }
+
         }
         return view;
     }

@@ -24,11 +24,18 @@ public class CheckboxPrompt extends FormComponent<ArrayList<String>, ArrayList<B
     public CheckboxPrompt(Context context, String prompt, ArrayList<String> options,
                           Boolean isEditing) {
         super(context, prompt, isEditing, new CheckboxPromptViewFactory(context), options);
-        setResponse(new ArrayList<Boolean>());
 
         if (options == null) {
             setOptions(new ArrayList<String>());
+            setResponse(new ArrayList<Boolean>());
+        } else if (response == null) {
+            ArrayList<Boolean> defaultResponse = new ArrayList<>();
+            for (int i = 0; i < options.size(); ++i) {
+                defaultResponse.add(false);
+            }
+            setResponse(new ArrayList<Boolean>());
         }
+
     }
 
     @Override
@@ -62,7 +69,7 @@ public class CheckboxPrompt extends FormComponent<ArrayList<String>, ArrayList<B
     @Override
     public void setResponse(ArrayList<Boolean> response) {
         // Do nothing if an invalid index is given
-        if (getOptions() == null || response.size() != getOptions().size()) {
+        if (getOptions() == null) {
             return;
         }
         this.response = response;
