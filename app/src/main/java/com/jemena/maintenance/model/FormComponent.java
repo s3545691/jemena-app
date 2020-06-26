@@ -57,10 +57,13 @@ public abstract class FormComponent<T, S> {
         return viewFactory.inflateView(this);
     }
 
+    public void setPromptNotify(String prompt) {
+        this.prompt = prompt;
+        notifyAdapter();
+    }
+
     public void setPrompt(String prompt) {
         this.prompt = prompt;
-
-        notifyAdapter();
     }
 
     public void setIsEditing(Boolean isEditing) {

@@ -1,6 +1,8 @@
 package com.jemena.maintenance.view.form_component_factory;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
 
         // Configure prompt EditText
         prompt.setText(radioPrompt.getPrompt());
+        prompt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                getComponent().setPrompt(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         // Add the removable radio options to the LinearLayout
         if (options != null) {
@@ -67,7 +85,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
 
                 options.add("Radio option text");
                 getComponent().setOptions(options);
-                getComponent().setPrompt(prompt.getText().toString());
+                getComponent().setPromptNotify(prompt.getText().toString());
 
                 getComponent().getArrayAdapter().notifyDataSetChanged();
             }
@@ -79,7 +97,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
             public void onClick(View view) {
 
                 // Go through each EditText and set the data in the model accordingly
-                getComponent().setPrompt(prompt.getText().toString());
+                getComponent().setPromptNotify(prompt.getText().toString());
 
                 ArrayList<String> newOptions = new ArrayList<>();
 
@@ -135,6 +153,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         ImageButton closeButton = optionView.findViewById(R.id.removable_imageButton);
 
         editText.setText(options.get(index));
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                getComponent().getOptions().set(index, s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
