@@ -85,6 +85,13 @@
             android:text="Page Divider" />
 
         <Button
+            android:id="@+id/add_header"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Header" />
+
+        <Button
             android:id="@+id/add_prompt_cancel"
             android:layout_width="200dp"
             android:layout_height="wrap_content"

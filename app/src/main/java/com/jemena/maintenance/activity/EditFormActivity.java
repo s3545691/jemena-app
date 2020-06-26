@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
@@ -23,6 +24,8 @@ import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.TextInput;
 import com.jemena.maintenance.model.persistence.DbHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +49,7 @@ public class EditFormActivity extends AppCompatActivity {
 
     // The view that appears when the user wants to add a new component
     private LinearLayout addPromptList;
+    private Object TextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +213,84 @@ public class EditFormActivity extends AppCompatActivity {
                 PageBreak pageBreak = new PageBreak(view.getContext());
                 pageBreak.setArrayAdapter(adapter);
                 components.add(pageBreak);
+                adapter.notifyDataSetChanged();
+
+                showAddPromptList(false);
+            }
+        });
+
+        Button addHeader = findViewById(R.id.add_header);
+        addHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new TextInput prompt
+
+                TextView introText = (android.widget.TextView) TextView;
+                introText.setText("Intro");
+
+                TextInput equipmentInput = new TextInput(view.getContext(),
+                        "Equipment No.",
+                        true
+                );
+
+                TextInput equipmentNameInput = new TextInput(view.getContext(),
+                        "Equipment Name",
+                        true
+                );
+
+                TextInput SAPInput = new TextInput(view.getContext(),
+                        "Entered in SAP",
+                        true
+                );
+
+                TextInput WeatherConditionInput = new TextInput(view.getContext(),
+                        "Weather Condition",
+                        true
+                );
+
+                TextInput DateInput = new TextInput(view.getContext(),
+                        "Date performed",
+                        true
+                );
+
+                TextInput LeaderInput = new TextInput(view.getContext(),
+                        "Team Leader in Charge",
+                        true
+                );
+
+                TextInput CrewInput = new TextInput(view.getContext(),
+                        "MAINTENANCE CREW",
+                        true
+                );
+
+                TextInput RecipientInput = new TextInput(view.getContext(),
+                        "RECIPIENT-IN-CHARGE",
+                        true
+                );
+
+                TextInput SMIInput = new TextInput(view.getContext(),
+                        "Work performed in accordance with SMI Signature:",
+                        true
+                );
+                equipmentInput.setArrayAdapter(adapter);
+                equipmentNameInput.setArrayAdapter(adapter);
+                SAPInput.setArrayAdapter(adapter);
+                WeatherConditionInput.setArrayAdapter(adapter);
+                DateInput.setArrayAdapter(adapter);
+                LeaderInput.setArrayAdapter(adapter);
+                CrewInput.setArrayAdapter(adapter);
+                RecipientInput.setArrayAdapter(adapter);
+                SMIInput.setArrayAdapter(adapter);
+          //      components.add(introText);
+                components.add(equipmentInput);
+                components.add(equipmentNameInput);
+                components.add(SAPInput);
+                components.add(WeatherConditionInput);
+                components.add(DateInput);
+                components.add(LeaderInput);
+                components.add(CrewInput);
+                components.add(RecipientInput);
+                components.add(SMIInput);
                 adapter.notifyDataSetChanged();
 
                 showAddPromptList(false);
