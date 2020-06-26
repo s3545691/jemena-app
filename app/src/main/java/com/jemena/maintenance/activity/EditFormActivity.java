@@ -239,7 +239,7 @@ public class EditFormActivity extends AppCompatActivity {
             final FormComponent component = getItem(position);
             convertView = component.getView();
 
-            // 'Add' the edit button to the component
+            // 'Add' the edit and delete button to the component
             if (!component.isEditing()) {
                 ImageButton editButton = convertView.findViewById(R.id.edit_button);
                 editButton.setVisibility(View.VISIBLE);
@@ -249,7 +249,18 @@ public class EditFormActivity extends AppCompatActivity {
                         component.setIsEditing(true);
                     }
                 });
-            } else {
+
+                ImageButton deleteButton = convertView.findViewById(R.id.delete_button);
+                deleteButton.setVisibility(View.VISIBLE);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        components.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+            else {
                 ImageButton upButton = convertView.findViewById(R.id.up_button);
                 upButton.setVisibility((position==0)?View.GONE:View.VISIBLE);
                 upButton.setOnClickListener(new View.OnClickListener() {
@@ -267,6 +278,16 @@ public class EditFormActivity extends AppCompatActivity {
                     }
                 });
 
+                ImageButton pageBreakDelete = convertView.findViewById(R.id.delete_button);
+                if (pageBreakDelete != null) {
+                    pageBreakDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            components.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+                }
             }
             return convertView;
         }
