@@ -47,4 +47,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/edit_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
     public RadioPrompt(Context context, String prompt, ArrayList<String> options,
                        Boolean isEditing) {
         super(context, prompt, isEditing, new RadioPromptViewFactory(context), options);
-        setResponse(-1);
+        setResponseNotify(-1);
 
         if (options == null) {
             setOptions(new ArrayList<String>());
@@ -58,7 +58,7 @@ public class RadioPrompt extends FormComponent<ArrayList<String>, Integer> {
     }
 
     @Override
-    public void setResponse(Integer index) {
+    public void setResponseNotify(Integer index) {
         // Do nothing if an invalid index is given
         if (getOptions() == null || index < -1 || index >= getOptions().size()) {
             return;

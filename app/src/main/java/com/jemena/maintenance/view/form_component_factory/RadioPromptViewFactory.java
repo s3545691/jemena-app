@@ -1,9 +1,12 @@
 package com.jemena.maintenance.view.form_component_factory;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -39,6 +42,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
 
         // Configure prompt EditText
         prompt.setText(radioPrompt.getPrompt());
+        prompt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                getComponent().setPrompt(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         // Add the removable radio options to the LinearLayout
         if (options != null) {
@@ -67,7 +86,8 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
 
                 options.add("Radio option text");
                 getComponent().setOptions(options);
-                getComponent().setPrompt(prompt.getText().toString());
+                getComponent().setPromptNotify(prompt.getText().toString());
+
                 getComponent().getArrayAdapter().notifyDataSetChanged();
             }
         });
@@ -78,7 +98,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
             public void onClick(View view) {
 
                 // Go through each EditText and set the data in the model accordingly
-                getComponent().setPrompt(prompt.getText().toString());
+                getComponent().setPromptNotify(prompt.getText().toString());
 
                 ArrayList<String> newOptions = new ArrayList<>();
 
@@ -101,7 +121,7 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         ArrayList<String> options = (ArrayList)radioPrompt.getOptions();
         View view = inflater.inflate(R.layout.radio_prompt, null);
 
-        RadioGroup radioGroup = view.findViewById(R.id.radio_group);
+        final RadioGroup radioGroup = view.findViewById(R.id.radio_group);
         TextView prompt = view.findViewById(R.id.prompt);
         prompt.setText(radioPrompt.getPrompt());
 
@@ -115,12 +135,32 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         if (options != null) {
             for (int i=0; i < options.size(); i++) {
 
-                RadioButton radioButton = new RadioButton(getContext());
+                final RadioButton radioButton = new RadioButton(getContext());
                 radioButton.setText(options.get(i));
-                radioButton.setId(ViewCompat.generateViewId());
+                int buttonId = ViewCompat.generateViewId();
+                radioButton.setId(buttonId);
+
                 radioGroup.addView(radioButton, params);
+
+                radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            int index = radioGroup.indexOfChild(radioButton);
+                            getComponent().setResponse(index);
+                        }
+                    }
+                });
+            }
+
+            // Check the right button according to the model
+            int checkedIndex = getComponent().getResponse();
+            if (checkedIndex != -1) {
+                RadioButton button = (RadioButton)radioGroup.getChildAt(checkedIndex);
+                button.setChecked(true);
             }
         }
+
         return view;
     }
 
@@ -134,6 +174,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         ImageButton closeButton = optionView.findViewById(R.id.removable_imageButton);
 
         editText.setText(options.get(index));
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                getComponent().getOptions().set(index, s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

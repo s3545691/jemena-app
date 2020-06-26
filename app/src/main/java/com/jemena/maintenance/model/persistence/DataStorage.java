@@ -20,8 +20,8 @@ public final class DataStorage {
 
 
     public static class FilledFormEntry implements BaseColumns {
-        public static final String TABLE_NAME = "filled-forms";
-        public static final String COLUMN_NAME_RESPONSES = "responses";
+        public static final String TABLE_NAME = "filled_forms";
+        public static final String COLUMN_NAME_JSON = "json";
         public static final String COLUMN_NAME_TYPE = "type";
         public static final String COlUMN_NAME_DATE = "date";
     }
@@ -29,9 +29,8 @@ public final class DataStorage {
     public static final String SQL_CREATE_FILLED_FORMS_TABLE =
             "CREATE TABLE " + FilledFormEntry.TABLE_NAME + " (" +
                     FilledFormEntry._ID + " INTEGER PRIMARY KEY," +
-                    FilledFormEntry.COLUMN_NAME_RESPONSES + " TEXT," +
+                    FilledFormEntry.COLUMN_NAME_JSON + " TEXT," +
                     FilledFormEntry.COLUMN_NAME_TYPE + " TEXT," +
-                    " FOREIGN KEY ("+FilledFormEntry.COLUMN_NAME_TYPE+") REFERENCES "+
                     FilledFormEntry.COlUMN_NAME_DATE + " TEXT)";
 
 

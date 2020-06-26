@@ -47,7 +47,7 @@ public class JsonHelper {
                     options,
                     false
             );
-            radioPrompt.setResponse(radio.getInt(Constants.RESPONSE));
+            radioPrompt.setResponseNotify(radio.getInt(Constants.RESPONSE));
         }
         catch (JSONException e){
             System.out.println(e.getMessage());
@@ -95,7 +95,7 @@ public class JsonHelper {
                     false
             );
 
-            textInput.setResponse(textInputJson.getString(Constants.RESPONSE));
+            textInput.setResponseNotify(textInputJson.getString(Constants.RESPONSE));
         }
         catch(JSONException e) {
             System.out.println(e.getMessage());

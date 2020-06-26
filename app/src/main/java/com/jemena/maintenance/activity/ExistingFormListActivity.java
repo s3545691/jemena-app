@@ -70,14 +70,14 @@ public class ExistingFormListActivity extends AppCompatActivity {
             }
         });
 
-        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper);
+        SearchBar searchBar = new SearchBar(this, adapter, forms, dbHelper, false);
     }
 
 
     private class FormListAdapter extends ArrayAdapter<HashMap<String,String>> {
 
         private LayoutInflater inflater;
-        private final Class activityToLaunch = isFill ? FillFormActivity.class : FormActivity.class;
+        private final Class activityToLaunch = isFill ? FillFormActivity.class : EditFormActivity.class;
 
         public FormListAdapter(Context context, int textViewResourceId,
                                List<HashMap<String, String>> forms) {
@@ -102,6 +102,10 @@ public class ExistingFormListActivity extends AppCompatActivity {
             if (!isFill) {
                 configDeleteButton(convertView, formMap, position);
             }
+            else {
+                ImageButton deleteButton = convertView.findViewById(R.id.delete_button);
+                deleteButton.setVisibility(View.GONE);
+            }
 
             return convertView;
         }
@@ -110,9 +114,6 @@ public class ExistingFormListActivity extends AppCompatActivity {
         private void configureText(View convertView, HashMap<String, String> form) {
             TextView title = convertView.findViewById(R.id.form_title);
             title.setText(form.get("title"));
-
-            TextView description = convertView.findViewById(R.id.form_description);
-            description.setText(form.get("desc"));
         }
 
 

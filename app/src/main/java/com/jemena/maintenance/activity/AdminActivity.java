@@ -9,12 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jemena.maintenance.R;
 
-import java.util.ArrayList;
-
-public class MenuActivity extends AppCompatActivity {
-
-    private Button createFormButton;
-    private Button viewFormButton;
+public class AdminActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +17,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         // Set attributes
-        createFormButton = (Button) findViewById(R.id.create_form);
-        viewFormButton = (Button) findViewById(R.id.view_form);
+        Button createFormButton = (Button) findViewById(R.id.create_form);
         createFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,12 +25,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        viewFormButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivityViewForm();
-            }
-        });
 
         Button editButton = findViewById(R.id.edit_form);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -49,14 +37,9 @@ public class MenuActivity extends AppCompatActivity {
 
         private void openActivityCreateForm() {
 
-            Intent intent = new Intent(this, FormActivity.class);
+            Intent intent = new Intent(this, EditFormActivity.class);
             intent.putExtra("isNew", true);
 
-            startActivity(intent);
-        }
-
-        private void openActivityViewForm() {
-            Intent intent = new Intent(this, ExistingFormListActivity.class);
             startActivity(intent);
         }
 
@@ -66,6 +49,4 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    // TODO Close the database connection when the app closes
 
