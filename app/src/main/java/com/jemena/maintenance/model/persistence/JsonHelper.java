@@ -2,6 +2,7 @@ package com.jemena.maintenance.model.persistence;
 
 import android.content.Context;
 
+import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
@@ -53,6 +54,34 @@ public class JsonHelper {
         }
 
         return radioPrompt;
+    }
+
+    public CheckboxPrompt toCheckbox(JSONObject checkbox) {
+        CheckboxPrompt checkboxPrompt = null;
+
+
+        try {
+            JSONArray optionsJson = checkbox.getJSONArray(Constants.OPTIONS);
+            ArrayList<String> options = toArrayList(optionsJson);
+
+            checkboxPrompt = new CheckboxPrompt(
+                    context,
+                    checkbox.getString(Constants.PROMPT),
+                    options,
+                    false
+            );
+            JSONArray responseJSON = checkbox.getJSONArray(Constants.RESPONSE);
+            ArrayList<Boolean> response = new ArrayList<>();
+            for (int i = 0; i < responseJSON.length(); ++i) {
+                response.add(responseJSON.getBoolean(i));
+            }
+            checkboxPrompt.setResponse(response);
+        }
+        catch (JSONException e){
+            System.out.println(e.getMessage());
+        }
+
+        return checkboxPrompt;
     }
 
 
@@ -121,6 +150,11 @@ public class JsonHelper {
                     case Constants.PAGE_BREAK:
                         prompts.add(toPageBreak(currObj));
                         break;
+
+                    case Constants.CHECKBOX:
+                        prompts.add(toCheckbox(currObj));
+                        break;
+
                 }
             }
             catch(JSONException e) {

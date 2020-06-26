@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.PageBreak;
@@ -161,6 +163,26 @@ public class FormActivity extends AppCompatActivity {
                 showAddPromptList(false);
             }
         });
+
+        Button addCheckboxPrompt = findViewById(R.id.add_prompt_checkbox_button);
+        addCheckboxPrompt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new radio prompt
+                CheckboxPrompt checkboxPrompt = new CheckboxPrompt(
+                        view.getContext(),
+                        "Prompt text",
+                        null,
+                        true
+                );
+                checkboxPrompt.setArrayAdapter(adapter);
+                components.add(checkboxPrompt);
+                adapter.notifyDataSetChanged();
+
+                showAddPromptList(false);
+            }
+        });
+
 
         Button addTextInputPrompt = findViewById(R.id.add_prompt_text_button);
         addTextInputPrompt.setOnClickListener(new View.OnClickListener() {

@@ -64,6 +64,13 @@
             android:text="Radio Prompt" />
 
         <Button
+            android:id="@+id/add_prompt_checkbox_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checkbox List" />
+
+        <Button
             android:id="@+id/add_prompt_text_button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
