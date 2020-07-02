@@ -16,25 +16,19 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.FormComponent;
-import com.jemena.maintenance.model.PdfWriter;
+import com.jemena.maintenance.model.pdf.PdfWriter;
 import com.jemena.maintenance.model.persistence.DbHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 
 public class FillFormActivity extends AppCompatActivity {
@@ -127,8 +121,9 @@ public class FillFormActivity extends AppCompatActivity {
 
         // Permissions
         if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            PdfWriter writer = new PdfWriter();
-            writer.write(findViewById(R.id.root), file);
+            PdfWriter writer = new PdfWriter(title.getText().toString());
+            writer.buildPdf(this, components);
+            writer.write(file);
         }
         else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);

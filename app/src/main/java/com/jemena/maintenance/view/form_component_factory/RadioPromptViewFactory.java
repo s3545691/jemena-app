@@ -21,6 +21,9 @@ import com.jemena.maintenance.model.RadioPrompt;
 
 import java.util.ArrayList;
 
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.PROMPT_SIZE;
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.RESPONSE_SIZE;
+
 public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
     public RadioPromptViewFactory(Context context) {
         super(context);
@@ -112,6 +115,22 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
                 radioPrompt.setIsEditing(false);
             }
         });
+        return view;
+    }
+
+    @Override
+    public View inflatePrintView(RadioPrompt component) {
+        View view = inflateInputView(component);
+
+        TextView prompt = view.findViewById(R.id.prompt);
+        prompt.setTextSize(PROMPT_SIZE);
+
+        RadioGroup radioGroup = view.findViewById(R.id.radio_group);
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton radioButton = (RadioButton)radioGroup.getChildAt(i);
+            radioButton.setTextSize(RESPONSE_SIZE);
+        }
+
         return view;
     }
 
@@ -210,4 +229,6 @@ public class RadioPromptViewFactory extends FormViewFactory<RadioPrompt> {
         });
         return optionView;
     }
+
+
 }

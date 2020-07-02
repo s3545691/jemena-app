@@ -18,6 +18,9 @@ import com.jemena.maintenance.model.CheckboxPrompt;
 
 import java.util.ArrayList;
 
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.PROMPT_SIZE;
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.RESPONSE_SIZE;
+
 public class CheckboxPromptViewFactory extends FormViewFactory<CheckboxPrompt> {
     public CheckboxPromptViewFactory(Context context) {
         super(context);
@@ -94,6 +97,23 @@ public class CheckboxPromptViewFactory extends FormViewFactory<CheckboxPrompt> {
                 checkboxPrompt.setIsEditing(false);
             }
         });
+        return view;
+    }
+
+    @Override
+    public View inflatePrintView(CheckboxPrompt component) {
+        View view = inflateInputView(component);
+
+        TextView prompt = view.findViewById(R.id.prompt);
+        prompt.setTextSize(PROMPT_SIZE);
+
+        // Set the text size of the checkbox options
+        LinearLayout checkboxGroup = view.findViewById(R.id.checkbox_group);
+        for (int i=0; i < checkboxGroup.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox)checkboxGroup.getChildAt(i);
+            checkBox.setTextSize(RESPONSE_SIZE);
+        }
+
         return view;
     }
 
