@@ -44,4 +44,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
+    <ImageButton
+        android:id="@+id/emailButton"
+        android:layout_width="43dp"
+        android:layout_height="39dp"
+        app:layout_constraintEnd_toStartOf="@+id/pdfButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_action_email" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
