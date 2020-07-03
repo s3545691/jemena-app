@@ -4,15 +4,20 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,6 +30,7 @@ import com.jemena.maintenance.model.persistence.JsonHelper;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +44,9 @@ public class FillFormActivity extends AppCompatActivity {
     TextView title;
     boolean isNew;
     Intent intent;
+
+    private static  final  int IMAGE_PICK_CODE = 1000;
+    private static final int PERMISSION_CODE = 1001;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -165,10 +174,51 @@ public class FillFormActivity extends AppCompatActivity {
             final FormComponent component = getItem(position);
             convertView = component.getView();
 
+
+            ImageButton addImageButton = findViewById(R.id.add_image_button);
+            if (addImageButton != null) {
+                addImageButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                    == PackageManager.PERMISSION_DENIED) {
+
+                                requestPermissions(new String[]
+                                                {Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        PERMISSION_CODE);
+                            } else {
+                                pickImage(position);
+                            }
+                        } else {
+                            pickImage(position);
+                        }
+                    }
+                });
+            }
             return convertView;
         }
     }
 
+    private void pickImage(int position) {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        intent.putExtra("Component index", position);
+        startActivityForResult(intent, IMAGE_PICK_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
+           int position = data.getIntExtra("Component index", -1);
+           if (position != -1) {
+               Uri imgUri = data.getData();
+
+               FormComponent component = components.get(position);
+           }
+        }
+    }
 
     @Override
     protected void onDestroy() {
