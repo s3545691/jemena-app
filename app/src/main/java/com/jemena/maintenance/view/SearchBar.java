@@ -7,8 +7,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.jemena.maintenance.R;
+import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.model.persistence.DbHelper;
+import com.jemena.maintenance.model.persistence.JsonHelper;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -70,20 +73,32 @@ public class SearchBar {
 
     private void filterForms(String searchTerm) {
         ArrayList<HashMap> toRemove = new ArrayList();
+        ArrayList<HashMap> inPrompt = new ArrayList<>();
         for (HashMap<String,String> formMap : forms) {
             String name = isFilled ? "type" : "title";
             String formTitle = formMap.get(name).toLowerCase();
 
             if (!formTitle.contains(searchTerm)) {
                 toRemove.add(formMap);
+                if (termInPrompt(formMap, searchTerm)) {
+                    inPrompt.add(formMap);
+                }
             }
         }
         for (HashMap map : toRemove) {
             forms.remove(map);
         }
+        for (HashMap map : inPrompt) {
+            forms.add(map);
+        }
         adapter.notifyDataSetChanged();
     }
 
+    private boolean termInPrompt(HashMap<String,String> formMap, String searchTerm) {
+        String rawJson = formMap.get("json").toLowerCase();
+        System.out.println(rawJson);
+        return rawJson.contains(searchTerm);
+    }
 
     private void resetFormsList() {
         ArrayList<HashMap<String,String>> formsBackup = isFilled ? dbHelper.getFilledFormList() : dbHelper.getFormList();
