@@ -15,4 +15,5 @@ public final class Constants {
     public static final String PROMPT = "PROMPT";
     public static final String RESPONSE = "RESPONSE";
     public static final String OPTIONS = "OPTIONS";
+    public static final String IMAGE = "IMAGE";
 }

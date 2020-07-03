@@ -3,6 +3,8 @@ package com.jemena.maintenance.model;
 import android.content.Context;
 
 import com.jemena.maintenance.view.form_component_factory.TextInputViewFactory;
+
+import static com.jemena.maintenance.model.persistence.Constants.IMAGE;
 import static com.jemena.maintenance.model.persistence.Constants.PROMPT;
 import static com.jemena.maintenance.model.persistence.Constants.TYPE;
 import static com.jemena.maintenance.model.persistence.Constants.RESPONSE;
@@ -36,6 +38,8 @@ public class TextInput extends FormComponent<Void, String> {
             returnValue.put(TYPE, TEXT);
             returnValue.put(PROMPT, getPrompt());
             returnValue.put(RESPONSE, getResponse());
+            returnValue.put(IMAGE, getImage().toString());
+
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }

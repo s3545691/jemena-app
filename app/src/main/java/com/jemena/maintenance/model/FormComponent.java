@@ -1,11 +1,16 @@
 package com.jemena.maintenance.model;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import org.json.JSONObject;
 
 import com.jemena.maintenance.view.form_component_factory.FormViewFactory;
+
+import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
 
 public abstract class FormComponent<T, S> {
     // Holds the current state of the application
@@ -27,6 +32,9 @@ public abstract class FormComponent<T, S> {
     // the user can choose would be an option
     private T options;
 
+    // Keeps track of the saved images for the prompt
+    Uri image;
+
     public FormComponent(Context context, String prompt, Boolean isEditing,
                          FormViewFactory formViewFactory,
                          T options) {
@@ -36,6 +44,7 @@ public abstract class FormComponent<T, S> {
         this.isEditing = isEditing;
         arrayAdapter = null;
         this.options = options == null ? instantiateEmptyOptions() : options;
+        image = Uri.parse("");
 
         viewFactory = formViewFactory;
         formViewFactory.setComponent(this);
@@ -118,4 +127,11 @@ public abstract class FormComponent<T, S> {
 
     public abstract JSONObject toJSON();
 
+    public void setImage(Uri image) {
+        this.image = image;
+    }
+
+    public Uri getImage() {
+        return image;
+    }
 }

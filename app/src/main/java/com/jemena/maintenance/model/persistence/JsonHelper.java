@@ -1,6 +1,7 @@
 package com.jemena.maintenance.model.persistence;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
@@ -10,7 +11,10 @@ import com.jemena.maintenance.model.TextInput;
 
 import org.json.*;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import static android.provider.CalendarContract.CalendarCache.URI;
 
 public class JsonHelper {
     Context context;
@@ -96,6 +100,11 @@ public class JsonHelper {
             );
 
             textInput.setResponseNotify(textInputJson.getString(Constants.RESPONSE));
+
+            String image = textInputJson.getString(Constants.IMAGE);
+            if (image != null) {
+                textInput.setImage(Uri.parse(image));
+            }
         }
         catch(JSONException e) {
             System.out.println(e.getMessage());

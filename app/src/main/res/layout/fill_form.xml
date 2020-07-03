@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pdfButton"
+        app:layout_constraintStart_toEndOf="@+id/emailButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -48,7 +48,7 @@
         android:id="@+id/emailButton"
         android:layout_width="43dp"
         android:layout_height="39dp"
-        app:layout_constraintEnd_toStartOf="@+id/pdfButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/sym_action_email" />
 
