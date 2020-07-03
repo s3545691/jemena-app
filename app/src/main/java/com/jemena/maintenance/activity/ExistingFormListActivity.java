@@ -55,6 +55,17 @@ public class ExistingFormListActivity extends AppCompatActivity {
         dbHelper.close();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        forms.clear();
+        ArrayList<HashMap<String,String>> newForms = dbHelper.getFormList();
+        for (HashMap form : newForms) {
+            forms.add(form);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
 
     private void configInterface() {
         ListView list = this.findViewById(R.id.form_list);
