@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jemena.maintenance.R;
@@ -102,28 +103,12 @@ public class TextInputViewFactory extends FormViewFactory<TextInput> {
             }
         });
 
-        // Courtesy of https://stackoverflow.com/a/8063533
-        // Save when focus is lost
-        input.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                                actionId == EditorInfo.IME_ACTION_DONE ||
-                                event != null &&
-                                        event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                            if (event == null || !event.isShiftPressed()) {
-                                // the user is done typing.
-                                formComponent.getArrayAdapter().notifyDataSetChanged();
-
-                                return true; // consume.
-                            }
-                        }
-                        return false; // pass on to other listeners.
-                    }
-                }
-        );
+        // Set the image if the component has one
+        if (!formComponent.getImage().toString().isEmpty()) {
+            ImageView image = view.findViewById(R.id.promptImage);
+            image.setImageURI(formComponent.getImage());
+            image.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

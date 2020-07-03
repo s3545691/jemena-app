@@ -252,6 +252,8 @@ public class FillFormActivity extends AppCompatActivity {
                Uri imgUri = data.getData();
 
                FormComponent component = components.get(position);
+               component.setImage(imgUri);
+               adapter.notifyDataSetChanged();
            }
         }
     }
