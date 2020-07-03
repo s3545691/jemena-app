@@ -48,11 +48,14 @@ public class FillFormActivity extends AppCompatActivity {
     private static  final  int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
 
+    private int indexOfImgPick;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fill_form);
 
+        indexOfImgPick = -1;
         dbHelper = new DbHelper(this);
         intent = getIntent();
         isNew = intent.getBooleanExtra("isNew", true);
@@ -240,22 +243,23 @@ public class FillFormActivity extends AppCompatActivity {
     private void pickImage(int position) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        intent.putExtra("Component index", position);
+        indexOfImgPick = position;
         startActivityForResult(intent, IMAGE_PICK_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-           int position = data.getIntExtra("Component index", -1);
-           if (position != -1) {
+
+           if (indexOfImgPick != -1) {
                Uri imgUri = data.getData();
 
-               FormComponent component = components.get(position);
+               FormComponent component = components.get(indexOfImgPick);
                component.setImage(imgUri);
                adapter.notifyDataSetChanged();
            }
         }
+        indexOfImgPick = -1;
     }
 
     @Override
