@@ -7,6 +7,7 @@ public final class Constants {
     public static final String RADIO = "RADIO";
     public static final String TEXT = "TEXT";
     public static final String PAGE_BREAK = "PAGE_BREAK";
+    public static final String SECTION = "SECTION";
     public static final String CHECKBOX = "CHECKBOX";
 
 

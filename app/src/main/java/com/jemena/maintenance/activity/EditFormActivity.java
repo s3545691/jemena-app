@@ -21,6 +21,7 @@ import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
 import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
+import com.jemena.maintenance.model.Section;
 import com.jemena.maintenance.model.TextInput;
 import com.jemena.maintenance.model.persistence.DbHelper;
 import com.jemena.maintenance.model.persistence.JsonHelper;
@@ -219,14 +220,31 @@ public class EditFormActivity extends AppCompatActivity {
             }
         });
 
+        Button addSectionPrompt = findViewById(R.id.add_section);
+        addSectionPrompt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new SectionInput prompt
+                Section sectionInput = new Section(view.getContext(),
+                        "Prompt text",
+                        true
+                );
+                sectionInput.setArrayAdapter(adapter);
+                components.add(sectionInput);
+                adapter.notifyDataSetChanged();
+
+                showAddPromptList(false);
+            }
+        });
+
         Button addHeader = findViewById(R.id.add_header);
         addHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create a new TextInput prompt
 
-                TextView introText = (android.widget.TextView) TextView;
-                introText.setText("Intro");
+             //   TextView introText = (android.widget.TextView) TextView;
+             //   introText.setText("Intro");
 
                 TextInput equipmentInput = new TextInput(view.getContext(),
                         "Equipment No.",
