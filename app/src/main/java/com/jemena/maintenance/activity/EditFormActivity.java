@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -226,7 +227,7 @@ public class EditFormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new SectionInput prompt
                 Section sectionInput = new Section(view.getContext(),
-                        "Prompt text",
+                        "Section Prompt text",
                         true
                 );
                 sectionInput.setArrayAdapter(adapter);
@@ -290,6 +291,37 @@ public class EditFormActivity extends AppCompatActivity {
                         "Work performed in accordance with SMI Signature:",
                         true
                 );
+
+                Section TextInput1 = new Section(view.getContext(),
+                        "- Overhaul CB in accordance with appropriate SMI and manufacturers maintenance manual",
+                        true
+
+                );
+
+                Section TextInput2 = new Section(view.getContext(),
+                        "- Circuit breaker Earthing:",
+                        true
+                );
+
+                Section TextInput3 = new Section(view.getContext(),
+                        "The Earths on each side of Circuit Breaker may be removed for the minimum time required for cleaning and/or testing of the Circuit Breaker.",
+                        true
+                );
+
+                Section TextInput4 = new Section(view.getContext(),
+                        "- Attend to PDR's",
+                        true
+                );
+
+                Section TextInput5 = new Section(view.getContext(),
+                        "- Lubrication:- Refer to lubrication guide",
+                        true
+                );
+
+                Section TextInput6 = new Section(view.getContext(),
+                        "- Do not apply Structovis to SF6 CB's.",
+                        true
+                );
                 equipmentInput.setArrayAdapter(adapter);
                 equipmentNameInput.setArrayAdapter(adapter);
                 SAPInput.setArrayAdapter(adapter);
@@ -299,6 +331,12 @@ public class EditFormActivity extends AppCompatActivity {
                 CrewInput.setArrayAdapter(adapter);
                 RecipientInput.setArrayAdapter(adapter);
                 SMIInput.setArrayAdapter(adapter);
+                TextInput1.setArrayAdapter(adapter);
+                TextInput2.setArrayAdapter(adapter);
+                TextInput3.setArrayAdapter(adapter);
+                TextInput4.setArrayAdapter(adapter);
+                TextInput5.setArrayAdapter(adapter);
+                TextInput6.setArrayAdapter(adapter);
           //      components.add(introText);
                 components.add(equipmentInput);
                 components.add(equipmentNameInput);
@@ -309,6 +347,12 @@ public class EditFormActivity extends AppCompatActivity {
                 components.add(CrewInput);
                 components.add(RecipientInput);
                 components.add(SMIInput);
+                components.add(TextInput1);
+                components.add(TextInput2);
+                components.add(TextInput3);
+                components.add(TextInput4);
+                components.add(TextInput5);
+                components.add(TextInput6);
                 adapter.notifyDataSetChanged();
 
                 showAddPromptList(false);
