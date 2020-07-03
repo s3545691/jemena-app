@@ -225,7 +225,7 @@ public class EditFormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new TextInput prompt
 
-                TextView introText = (android.widget.TextView) TextView;
+                TextView introText = new TextView(view.getContext());
                 introText.setText("Intro");
 
                 TextInput equipmentInput = new TextInput(view.getContext(),
