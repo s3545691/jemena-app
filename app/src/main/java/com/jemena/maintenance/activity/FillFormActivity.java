@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -106,10 +109,28 @@ public class FillFormActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // Config email button
+        ImageButton emailButton = findViewById(R.id.emailButton);
+        if (isNew) {
+            emailButton.setVisibility(View.GONE);
+        }
+        else {
+            emailButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    File file = savePdf();
+                    emailPdf(file);
+                }
+            });
+        }
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
 
 
-    private void savePdf() {
+    private File savePdf() {
         String fileName = title.getText().toString().replace(' ', '_') + ".pdf";
         File dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         File file = new File("sdcard/Download", fileName);
@@ -124,10 +145,14 @@ public class FillFormActivity extends AppCompatActivity {
             PdfWriter writer = new PdfWriter(title.getText().toString());
             writer.buildPdf(this, components);
             writer.write(file);
+
+            return file;
         }
         else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
+
+        return file;
     }
 
 
@@ -148,6 +173,20 @@ public class FillFormActivity extends AppCompatActivity {
             dbHelper.updateFilledForm(Long.valueOf(intent.getStringExtra("id")), formMap);
         }
         finish();
+    }
+
+
+    private void emailPdf(File file) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"@jemena.com.au"});
+        intent.putExtra(Intent.EXTRA_SUBJECT, title.getText().toString());
+        intent.putExtra(Intent.EXTRA_TEXT, "");
+
+        Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(intent, "Send email..."));
     }
 
 
