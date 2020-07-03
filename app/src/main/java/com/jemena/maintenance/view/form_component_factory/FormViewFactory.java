@@ -34,6 +34,8 @@ public abstract class FormViewFactory<T extends FormComponent> {
         return view;
     }
 
+    public abstract View inflatePrintView(T component);
+
     public T getComponent() {
         return component;
     }

@@ -57,6 +57,10 @@ public abstract class FormComponent<T, S> {
         return viewFactory.inflateView(this);
     }
 
+    public View getPrintView() {
+        return viewFactory.inflatePrintView(this);
+    }
+
     public void setPromptNotify(String prompt) {
         this.prompt = prompt;
         notifyAdapter();

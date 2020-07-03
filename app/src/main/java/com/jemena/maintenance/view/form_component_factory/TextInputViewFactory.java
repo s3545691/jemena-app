@@ -16,11 +16,11 @@ import com.jemena.maintenance.model.TextInput;
 
 import java.util.Timer;
 
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.PROMPT_SIZE;
+import static com.jemena.maintenance.view.form_component_factory.PrintConstants.RESPONSE_SIZE;
+
 
 public class TextInputViewFactory extends FormViewFactory<TextInput> {
-    // Used to gauge when the user has finished typing
-    Timer timer;
-
     public TextInputViewFactory(Context context) {
         super(context);
     }
@@ -62,8 +62,20 @@ public class TextInputViewFactory extends FormViewFactory<TextInput> {
     }
 
     @Override
+    public View inflatePrintView(TextInput component) {
+        View view = inflateInputView(component);
+
+        TextView promptText = view.findViewById(R.id.prompt);
+        promptText.setTextSize(PROMPT_SIZE);
+
+        EditText responseText = view.findViewById(R.id.input_field);
+        responseText.setTextSize(RESPONSE_SIZE);
+
+        return view;
+    }
+
+    @Override
     protected View inflateInputView(final TextInput formComponent) {
-        final TextInput textInputPrompt = (TextInput)formComponent;
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.text_input_prompt, null);
 

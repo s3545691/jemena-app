@@ -36,4 +36,9 @@ public class PageBreakViewFactory extends FormViewFactory<PageBreak> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         return inflater.inflate(R.layout.page_break, null);
     }
+
+    @Override
+    public View inflatePrintView(PageBreak component) {
+        return null;
+    }
 }

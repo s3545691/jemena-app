@@ -105,7 +105,7 @@ public class DbHelper {
         };
 
         String sortOrder =
-                DataStorage.FormEntry.COLUMN_NAME_TITLE + " DESC";
+                DataStorage.FormEntry.COLUMN_NAME_TITLE + " ASC";
 
         Cursor cursor = db.query(
                 DataStorage.FormEntry.TABLE_NAME,   // The table to query
