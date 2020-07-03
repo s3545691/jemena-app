@@ -35,7 +35,6 @@ public class Section extends FormComponent<Void, String> {
         try {
             returnValue.put(TYPE, SECTION);
             returnValue.put(PROMPT, getPrompt());
-            returnValue.put(RESPONSE, getResponse());
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }

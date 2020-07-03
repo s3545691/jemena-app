@@ -62,6 +62,12 @@ public class SectionViewFactory extends FormViewFactory<Section> {
     }
 
     @Override
+    public View inflatePrintView(Section component) {
+        View view = inflateInputView(component);
+        return view;
+    }
+
+    @Override
     protected View inflateInputView(final Section formComponent) {
         final Section textInputPrompt = (Section)formComponent;
         LayoutInflater inflater = LayoutInflater.from(getContext());

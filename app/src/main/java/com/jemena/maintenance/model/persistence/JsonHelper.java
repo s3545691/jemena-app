@@ -6,6 +6,7 @@ import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
+import com.jemena.maintenance.model.Section;
 import com.jemena.maintenance.model.TextInput;
 
 import org.json.*;
@@ -108,6 +109,19 @@ public class JsonHelper {
         return new PageBreak(context);
     }
 
+    public Section toSection(JSONObject sectionJson) {
+        try {
+            return new Section(
+                    context,
+                    sectionJson.getString(Constants.PROMPT),
+                    false
+            );
+        }
+        catch(JSONException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
     public ArrayList<String> toArrayList(JSONArray jsonArr) {
 
@@ -125,6 +139,8 @@ public class JsonHelper {
 
         return array;
     }
+
+
 
 
     public ArrayList<FormComponent> getComponentList(String json) {
@@ -155,6 +171,9 @@ public class JsonHelper {
                         prompts.add(toCheckbox(currObj));
                         break;
 
+                    case Constants.SECTION:
+                        prompts.add(toSection(currObj));
+                        break;
                 }
             }
             catch(JSONException e) {
