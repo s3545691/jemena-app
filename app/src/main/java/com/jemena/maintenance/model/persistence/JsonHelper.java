@@ -1,9 +1,11 @@
 package com.jemena.maintenance.model.persistence;
 
 import android.content.Context;
+import android.preference.PreferenceActivity;
 
 import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
+import com.jemena.maintenance.model.HeaderPrompt;
 import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.Section;
@@ -123,6 +125,20 @@ public class JsonHelper {
         }
     }
 
+    public HeaderPrompt toHeader(JSONObject headerJson) {
+        HeaderPrompt header = new HeaderPrompt(context, false);
+
+        try {
+            JSONArray responseJson = headerJson.getJSONArray(Constants.RESPONSE);
+            header.setResponse(toArrayList(responseJson));
+            return header;
+        }
+        catch(JSONException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public ArrayList<String> toArrayList(JSONArray jsonArr) {
 
         ArrayList<String> array = new ArrayList<>();
@@ -139,8 +155,6 @@ public class JsonHelper {
 
         return array;
     }
-
-
 
 
     public ArrayList<FormComponent> getComponentList(String json) {
@@ -173,6 +187,10 @@ public class JsonHelper {
 
                     case Constants.SECTION:
                         prompts.add(toSection(currObj));
+                        break;
+
+                    case Constants.HEADER:
+                        prompts.add(toHeader(currObj));
                         break;
                 }
             }

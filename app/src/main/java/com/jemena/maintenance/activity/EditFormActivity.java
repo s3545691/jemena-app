@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.jemena.maintenance.model.CheckboxPrompt;
 import com.jemena.maintenance.model.FormComponent;
 import com.jemena.maintenance.R;
+import com.jemena.maintenance.model.HeaderPrompt;
 import com.jemena.maintenance.model.PageBreak;
 import com.jemena.maintenance.model.RadioPrompt;
 import com.jemena.maintenance.model.Section;
@@ -242,119 +244,21 @@ public class EditFormActivity extends AppCompatActivity {
         addHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create a new TextInput prompt
 
-             //   TextView introText = (android.widget.TextView) TextView;
-             //   introText.setText("Intro");
+                HeaderPrompt header = new HeaderPrompt(view.getContext());
 
-                TextInput equipmentInput = new TextInput(view.getContext(),
-                        "Equipment No.",
-                        true
-                );
+                ArrayList<FormComponent> copy = new ArrayList();
+                for (FormComponent component : components) {
+                    copy.add(component);
+                }
 
-                TextInput equipmentNameInput = new TextInput(view.getContext(),
-                        "Equipment Name",
-                        true
-                );
+                components.clear();
+                components.add(header);
+                for (FormComponent component : copy) {
+                    components.add(component);
+                }
 
-                TextInput SAPInput = new TextInput(view.getContext(),
-                        "Entered in SAP",
-                        true
-                );
-
-                TextInput WeatherConditionInput = new TextInput(view.getContext(),
-                        "Weather Condition",
-                        true
-                );
-
-                TextInput DateInput = new TextInput(view.getContext(),
-                        "Date performed",
-                        true
-                );
-
-                TextInput LeaderInput = new TextInput(view.getContext(),
-                        "Team Leader in Charge",
-                        true
-                );
-
-                TextInput CrewInput = new TextInput(view.getContext(),
-                        "MAINTENANCE CREW",
-                        true
-                );
-
-                TextInput RecipientInput = new TextInput(view.getContext(),
-                        "RECIPIENT-IN-CHARGE",
-                        true
-                );
-
-                TextInput SMIInput = new TextInput(view.getContext(),
-                        "Work performed in accordance with SMI Signature:",
-                        true
-                );
-
-                Section TextInput1 = new Section(view.getContext(),
-                        "- Overhaul CB in accordance with appropriate SMI and manufacturers maintenance manual",
-                        true
-
-                );
-
-                Section TextInput2 = new Section(view.getContext(),
-                        "- Circuit breaker Earthing:",
-                        true
-                );
-
-                Section TextInput3 = new Section(view.getContext(),
-                        "The Earths on each side of Circuit Breaker may be removed for the minimum time required for cleaning and/or testing of the Circuit Breaker.",
-                        true
-                );
-
-                Section TextInput4 = new Section(view.getContext(),
-                        "- Attend to PDR's",
-                        true
-                );
-
-                Section TextInput5 = new Section(view.getContext(),
-                        "- Lubrication:- Refer to lubrication guide",
-                        true
-                );
-
-                Section TextInput6 = new Section(view.getContext(),
-                        "- Do not apply Structovis to SF6 CB's.",
-                        true
-                );
-                equipmentInput.setArrayAdapter(adapter);
-                equipmentNameInput.setArrayAdapter(adapter);
-                SAPInput.setArrayAdapter(adapter);
-                WeatherConditionInput.setArrayAdapter(adapter);
-                DateInput.setArrayAdapter(adapter);
-                LeaderInput.setArrayAdapter(adapter);
-                CrewInput.setArrayAdapter(adapter);
-                RecipientInput.setArrayAdapter(adapter);
-                SMIInput.setArrayAdapter(adapter);
-                TextInput1.setArrayAdapter(adapter);
-                TextInput2.setArrayAdapter(adapter);
-                TextInput3.setArrayAdapter(adapter);
-                TextInput4.setArrayAdapter(adapter);
-                TextInput5.setArrayAdapter(adapter);
-                TextInput6.setArrayAdapter(adapter);
-          //      components.add(introText);
-                components.add(equipmentInput);
-                components.add(equipmentNameInput);
-                components.add(SAPInput);
-                components.add(WeatherConditionInput);
-                components.add(DateInput);
-                components.add(LeaderInput);
-                components.add(CrewInput);
-                components.add(RecipientInput);
-                components.add(SMIInput);
-                components.add(TextInput1);
-                components.add(TextInput2);
-                components.add(TextInput3);
-                components.add(TextInput4);
-                components.add(TextInput5);
-                components.add(TextInput6);
                 adapter.notifyDataSetChanged();
-
                 showAddPromptList(false);
             }
         });
@@ -406,7 +310,7 @@ public class EditFormActivity extends AppCompatActivity {
             convertView = component.getView();
 
             // 'Add' the edit and delete button to the component
-            if (!component.isEditing()) {
+            if (!component.isEditing() && component.getClass() != HeaderPrompt.class) {
                 ImageButton editButton = convertView.findViewById(R.id.edit_button);
                 editButton.setVisibility(View.VISIBLE);
                 editButton.setOnClickListener(new View.OnClickListener() {

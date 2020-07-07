@@ -18,8 +18,6 @@ import java.util.Timer;
 
 
 public class SectionViewFactory extends FormViewFactory<Section> {
-    // Used to gauge when the user has finished typing
-    Timer timer;
 
     public SectionViewFactory(Context context) {
         super(context);
